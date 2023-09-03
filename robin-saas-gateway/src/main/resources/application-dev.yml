@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.10.103:8848
+      config:
+        server-addr: 192.168.10.103:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+    loadbalancer:
+      retry:
+        enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        ## yml文件中存在特殊字符，必须使用单引号
+        include: '*'
