@@ -10,8 +10,8 @@
     <artifactId>robin-saas-gateway</artifactId>
     <packaging>jar</packaging>
 
-    <name>robin-saas-gateway</name>
-    <description>API 统一网关服务</description>
+    <name>API统一网关服务</name>
+    <description>robin-saas-gateway</description>
 
     <dependencies>
         <dependency>
