@@ -15,11 +15,10 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <robin-saas-dependencies.version>1.0.0</robin-saas-dependencies.version>
         <lombok.version>1.18.26</lombok.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
         <spring-boot.version>3.0.2</spring-boot.version>
-        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
-        <spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
     </properties>
 
     <modules>
@@ -27,6 +26,7 @@
         <module>robin-saas-uaa</module>
         <module>robin-saas-uoc</module>
         <module>robin-saas-dc</module>
+        <module>robin-saas-dc/robin-starter-database</module>
     </modules>
 
     <dependencies>
@@ -46,23 +46,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-saas-dependencies</artifactId>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -81,34 +67,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <mainClass>cn.com.mockingbird.robin.saas.RobinSaasApplication</mainClass>
-                    <skip>true</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 </project>

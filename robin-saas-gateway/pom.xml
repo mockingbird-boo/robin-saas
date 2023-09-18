@@ -13,6 +13,10 @@
     <name>API统一网关服务</name>
     <description>robin-saas-gateway</description>
 
+    <properties>
+        <spring-boot.version>3.0.2</spring-boot.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -52,4 +56,48 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <mainClass>cn.com.mockingbird.saas.RobinSaasGatewayApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshot</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

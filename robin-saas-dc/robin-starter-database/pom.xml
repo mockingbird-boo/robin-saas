@@ -7,20 +7,15 @@
         <groupId>cn.com.mockingbird</groupId>
         <artifactId>robin-saas</artifactId>
         <version>1.0.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>robin-saas-dc</artifactId>
-    <packaging>pom</packaging>
-    <name>开发者中心</name>
-    <description>Developer Center</description>
+    <artifactId>robin-starter-database</artifactId>
 
-    <modules>
-        <module>robin-starter-common</module>
-        <module>robin-spring-webmvc</module>
-        <module>robin-redis</module>
-        <module>robin-swagger3</module>
-        <module>robin-starter-feign</module>
-        <module>robin-starter-log</module>
-    </modules>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>
