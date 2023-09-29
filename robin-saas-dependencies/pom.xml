@@ -7,7 +7,7 @@
     <artifactId>robin-saas-dependencies</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>依赖管理模块</name>
+    <name>统一依赖管理模块</name>
     <description>robin-saas-dependencies</description>
 
     <properties>
@@ -17,6 +17,10 @@
         <spring-boot.version>3.0.2</spring-boot.version>
         <spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <mybatis-flex-spring-boot-starter.version>1.6.8</mybatis-flex-spring-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>
+        <mysql-connector-j.version>8.1.0</mysql-connector-j.version>
+        <postgresql.version>42.6.0</postgresql.version>
     </properties>
 
     <dependencyManagement>
@@ -42,6 +46,35 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+                <version>${mybatis-flex-spring-boot-starter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql-connector-j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
