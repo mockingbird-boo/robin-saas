@@ -1,6 +1,6 @@
-package cn.com.mockingbird.webmvc.advice;
+package cn.com.mockingbird.robin.webmvc.advice;
 
-import cn.com.mockingbird.webmvc.model.ResponseData;
+import cn.com.mockingbird.robin.webmvc.model.ResponseData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.core.MethodParameter;

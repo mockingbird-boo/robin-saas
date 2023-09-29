@@ -15,12 +15,25 @@
     <description>Developer Center</description>
 
     <modules>
-        <module>robin-starter-common</module>
         <module>robin-spring-webmvc</module>
         <module>robin-redis</module>
         <module>robin-swagger3</module>
         <module>robin-starter-feign</module>
         <module>robin-starter-log</module>
+        <module>robin-common</module>
+        <module>robin-starter-quartz</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-junit5-dependencies</artifactId>
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

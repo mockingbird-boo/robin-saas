@@ -1,7 +1,7 @@
-package cn.com.mockingbird.webmvc.exception;
+package cn.com.mockingbird.robin.webmvc.exception;
 
-import cn.com.mockingbird.webmvc.enums.ResponseCode;
-import cn.com.mockingbird.webmvc.model.ResponseData;
+import cn.com.mockingbird.robin.webmvc.enums.ResponseCode;
+import cn.com.mockingbird.robin.webmvc.model.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

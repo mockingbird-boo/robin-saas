@@ -1,6 +1,6 @@
-package cn.com.mockingbird.webmvc.model;
+package cn.com.mockingbird.robin.webmvc.model;
 
-import cn.com.mockingbird.webmvc.enums.ResponseCode;
+import cn.com.mockingbird.robin.webmvc.enums.ResponseCode;
 import lombok.Data;
 
 import java.time.Instant;
