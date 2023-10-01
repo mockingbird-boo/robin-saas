@@ -11,9 +11,11 @@ spring:
     properties:
       org:
         quartz:
+          # 调度器配置
           scheduler:
             instanceName: clusteredScheduler
             instanceId: AUTO
+          # 存储配置
           jobStore:
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
@@ -21,6 +23,7 @@ spring:
             isClustered: true
             clusterCheckinInterval: 10000
             useProperties: false
+          # 线程池配置
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 10
