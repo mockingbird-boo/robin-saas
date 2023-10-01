@@ -22,15 +22,24 @@ public class Log {
 
     private Long jobId;
 
+    /**
+     * 目标bean
+     */
     private String bean;
 
     private String params;
 
-    private Integer status;
+    /**
+     * 执行结果：1-成功；2-失败
+     */
+    private Integer result;
 
     private String error;
 
-    private Integer times;
+    /**
+     * 执行时长
+     */
+    private Integer duration;
 
     private LocalDateTime createdTime;
 

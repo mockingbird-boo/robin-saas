@@ -11,7 +11,7 @@
 
     <artifactId>robin-common</artifactId>
     <packaging>pom</packaging>
-    <name>Java 开发工具集</name>
+    <name>应用开发公共组件集</name>
 
     <properties>
         <orika-core.version>1.5.4</orika-core.version>
@@ -23,6 +23,10 @@
             <groupId>ma.glasnost.orika</groupId>
             <artifactId>orika-core</artifactId>
             <version>${orika-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>

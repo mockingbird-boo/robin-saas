@@ -48,6 +48,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.mybatis-flex</groupId>
                 <artifactId>mybatis-flex-spring-boot-starter</artifactId>
                 <version>${mybatis-flex-spring-boot-starter.version}</version>
