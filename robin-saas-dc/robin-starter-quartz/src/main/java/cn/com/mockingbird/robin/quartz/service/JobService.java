@@ -118,7 +118,7 @@ public class JobService {
      */
     public void run(Long id) {
         Job job = jobMapper.selectOneById(id);
-        if (job != null && job.getStatus() != StatusEnum.STOP.getStatus()) {
+        if (job != null && job.getStatus() != StatusEnum.DELETED.getStatus()) {
             quartzJobManager.runJob(job);
         }
     }

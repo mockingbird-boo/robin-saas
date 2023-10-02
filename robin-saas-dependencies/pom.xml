@@ -53,6 +53,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-spring-webmvc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.mybatis-flex</groupId>
                 <artifactId>mybatis-flex-spring-boot-starter</artifactId>
                 <version>${mybatis-flex-spring-boot-starter.version}</version>

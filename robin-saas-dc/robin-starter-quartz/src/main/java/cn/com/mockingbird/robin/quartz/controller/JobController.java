@@ -1,62 +1,64 @@
 package cn.com.mockingbird.robin.quartz.controller;
 
-import cn.com.mockingbird.robin.quartz.entity.JobDetails;
-import cn.com.mockingbird.robin.quartz.schedule.QuartzManager;
-import com.github.pagehelper.PageInfo;
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import cn.com.mockingbird.robin.quartz.entity.Job;
+import cn.com.mockingbird.robin.quartz.service.JobService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 任务 Cotroller
+ * Quartz JOB Controller
  *
  * @author zhaopeng
- * @date 2023/9/30 0:26
+ * @date 2023/10/2 17:56
  **/
 @RestController
 @RequestMapping("/api/quartz/job")
+@Tag(name = "Quartz 定时任务相关接口")
 public class JobController {
 
-    private final QuartzManager quartzManager;
+    private final JobService jobService;
 
-    public JobController(QuartzManager quartzManager) {
-        this.quartzManager = quartzManager;
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
     }
 
+    @Operation(summary = "任务查询")
+    @GetMapping("/{id}")
+    public Job getJob(@PathVariable("id") Long id) {
+        return jobService.selectById(id);
+    }
+
+    @Operation(summary = "任务新增")
     @PostMapping
-    public void addJob(@RequestParam("className") String className,
-                       @RequestParam("group") String group,
-                       @RequestParam("cron") String cron) throws Exception {
-        quartzManager.upsertJob(getClass(className), className, group, cron);
+    public Job addJob(@RequestBody Job job) {
+        jobService.insert(job);
+        return job;
     }
 
-    @PutMapping("/pause")
-    public void pauseJob(@RequestParam("mame") String name, @RequestParam("group") String group) {
-        quartzManager.pauseJob(name, group);
+    @Operation(summary = "任务更新")
+    @PutMapping
+    public Job updateJob(@RequestBody Job job) {
+        jobService.update(job);
+        return job;
     }
 
-    @PutMapping("/resume")
-    public void resumeJob(@RequestParam("mame") String name, @RequestParam("group") String group) {
-        quartzManager.resumeJob(name, group);
+    @Operation(summary = "任务停止")
+    @PostMapping("/pause/{id}")
+    public void pause(@PathVariable("id") Long id) {
+        jobService.pause(id);
     }
 
-    @PutMapping("/run")
-    public void runJob(@RequestParam("mame") String name, @RequestParam("group") String group) {
-        quartzManager.runJob(name, group);
+    @Operation(summary = "任务恢复")
+    @PostMapping("/resume/{id}")
+    public void resume(@PathVariable("id") Long id) {
+        jobService.resume(id);
     }
 
-    @DeleteMapping
-    public void deleteJob(@RequestParam("mame") String name, @RequestParam("group") String group) {
-        quartzManager.deleteJob(name, group);
+    @Operation(summary = "任务执行")
+    @PostMapping("/run/{id}")
+    public void run(@PathVariable("id") Long id) {
+        jobService.run(id);
     }
 
-    @GetMapping
-    public PageInfo<JobDetails>  getJobs(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
-        return quartzManager.selectAllJobs(pageNum, pageSize);
-    }
-
-    @SuppressWarnings("unchecked")
-    private Class<? extends QuartzJobBean> getClass(String className) throws ClassNotFoundException {
-        Class<?> clazz = Class.forName(className);
-        return (Class<? extends QuartzJobBean>) clazz;
-    }
 }

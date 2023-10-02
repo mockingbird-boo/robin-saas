@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>robin-common</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>应用开发公共组件集</name>
 
     <properties>

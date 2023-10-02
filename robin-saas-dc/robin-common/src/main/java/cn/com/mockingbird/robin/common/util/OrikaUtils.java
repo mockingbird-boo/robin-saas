@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Orika 封装的工具类，用于实例转换
- *
+ * <p>
  * version 1.0.0
  * @author zhaopeng
  * @date 2023/9/21 1:59
@@ -84,6 +84,7 @@ public enum OrikaUtils {
      * @param <S> 源泛型
      * @param <T> 目标泛型
      */
+    @SuppressWarnings("all")
     public <S, T> List<T> convertList(List<S> sourceInstances, Class<T> targetClass) {
         return convertList(sourceInstances, targetClass, null);
     }
