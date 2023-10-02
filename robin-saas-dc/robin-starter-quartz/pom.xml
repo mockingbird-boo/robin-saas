@@ -10,11 +10,7 @@
     </parent>
 
     <artifactId>robin-starter-quartz</artifactId>
-    <name>Quartz 定时任务</name>
-
-    <properties>
-        <pagehelper.version>5.3.3</pagehelper.version>
-    </properties>
+    <name>Quartz 定时任务集成</name>
 
     <dependencies>
         <dependency>
@@ -48,7 +44,6 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>5.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>

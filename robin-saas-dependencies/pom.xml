@@ -17,11 +17,14 @@
         <spring-boot.version>3.0.2</spring-boot.version>
         <spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <lombok.version>1.18.26</lombok.version>
+        <commons-lang3.version>3.13.0</commons-lang3.version>
         <mybatis-flex-spring-boot-starter.version>1.6.8</mybatis-flex-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>
         <mysql-connector-j.version>8.1.0</mysql-connector-j.version>
         <postgresql.version>42.6.0</postgresql.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
+        <HikariCP.version>5.0.1</HikariCP.version>
     </properties>
 
     <dependencyManagement>
@@ -58,6 +61,16 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.mybatis-flex</groupId>
                 <artifactId>mybatis-flex-spring-boot-starter</artifactId>
                 <version>${mybatis-flex-spring-boot-starter.version}</version>
@@ -82,7 +95,11 @@
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${HikariCP.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

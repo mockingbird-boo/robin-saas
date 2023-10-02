@@ -19,7 +19,6 @@
         <module>robin-spring-webmvc</module>
         <module>robin-starter-database</module>
         <module>robin-redis</module>
-        <module>robin-swagger3</module>
         <module>robin-starter-feign</module>
         <module>robin-starter-log</module>
         <module>robin-starter-quartz</module>
