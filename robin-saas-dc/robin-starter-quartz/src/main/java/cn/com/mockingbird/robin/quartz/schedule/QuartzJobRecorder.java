@@ -13,7 +13,9 @@ import org.springframework.util.StopWatch;
 import java.lang.reflect.Method;
 
 /**
- * 任务记录器
+ * 任务执行记录器
+ * <p>
+ * 通过反射执行目标bean的目标方法run方法同时，会进行执行日志记录
  *
  * @author zhaopeng
  * @date 2023/10/2 0:03
@@ -40,11 +42,11 @@ public class QuartzJobRecorder extends QuartzJobBean {
             targetMethod.setAccessible(true);
             targetMethod.invoke(targetBean, job.getParams());
             stopWatch.stop();
-            log.setDuration((int)stopWatch.getTotalTimeSeconds());
+            log.setDuration((int)stopWatch.getTotalTimeMillis());
             log.setResult(ResultEnum.SUCCESS.getResult());
         } catch (Exception e) {
             stopWatch.stop();
-            log.setDuration((int)stopWatch.getTotalTimeSeconds());
+            log.setDuration((int)stopWatch.getTotalTimeMillis());
             log.setResult(ResultEnum.FAILURE.getResult());
             log.setError(e.getMessage());
         } finally {

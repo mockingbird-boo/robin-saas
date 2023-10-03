@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ApiConfiguration implements WebMvcConfigurer {
 
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI openApi() {
         return new OpenAPI().info(new Info()
                 .title("Quartz API 接口文档")
                 .description("支持定时任务接入、执行、管理")
