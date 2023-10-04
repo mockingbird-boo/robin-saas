@@ -17,11 +17,9 @@
     <modules>
         <module>robin-common</module>
         <module>robin-spring-webmvc</module>
-        <module>robin-starter-database</module>
-        <module>robin-redis</module>
-        <module>robin-starter-feign</module>
-        <module>robin-starter-log</module>
         <module>robin-starter-quartz</module>
+        <module>robin-banner-spring-boot-starter</module>
+        <module>robin-mybatis-spring-boot-starter</module>
     </modules>
 
     <dependencyManagement>

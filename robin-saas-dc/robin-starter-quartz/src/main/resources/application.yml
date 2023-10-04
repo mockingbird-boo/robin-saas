@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: robin-starter-quartz
@@ -33,3 +34,5 @@ spring:
     auto-startup: true
     jdbc:
       initialize-schema: never
+server:
+  port: 8081
