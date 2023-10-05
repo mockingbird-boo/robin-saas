@@ -33,6 +33,11 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>
