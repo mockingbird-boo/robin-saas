@@ -25,6 +25,7 @@
         <postgresql.version>42.6.0</postgresql.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
         <HikariCP.version>5.0.1</HikariCP.version>
+        <transmittable-thread-local.version>2.14.3</transmittable-thread-local.version>
     </properties>
 
     <dependencyManagement>
@@ -99,6 +100,11 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${HikariCP.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.com.mockingbird</groupId>
