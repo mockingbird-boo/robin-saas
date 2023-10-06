@@ -25,6 +25,6 @@ public class LoginUser {
 
     private String name;
 
-
+    private Boolean isIgnore;
 
 }
