@@ -62,7 +62,7 @@ public class TraceAspect {
      * @param level 日志级别
      * @param description 描述
      */
-    private void recordLog(MethodTracker.TrackingData trackingData, String path, Level level, String description) {
+    private void recordLog(MethodTracker.TrackingData<?> trackingData, String path, Level level, String description) {
         String logInfo = StringUtils.isBlank(description) ?
                 "方法追踪 ==> [{}]，耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]" :
                 "方法追踪 ==> [{}]，[{}] 耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]";
