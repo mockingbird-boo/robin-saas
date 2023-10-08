@@ -26,12 +26,12 @@ public class PageData<T> {
     /**
      * 总数据量
      */
-    private long total;
+    private Long total;
 
     /**
      * 分页数
      */
-    private long pages;
+    private Long pages;
 
     /**
      * 获取一个空页实例

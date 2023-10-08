@@ -1,10 +1,16 @@
 package cn.com.mockingbird.robin.mybatis.base;
 
+import cn.com.mockingbird.robin.mybatis.util.MyBatisPlusUtils;
+import cn.com.mockingbird.robin.webmvc.model.PageData;
+import cn.com.mockingbird.robin.webmvc.model.PageParams;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +23,19 @@ import java.util.List;
  * @date 2023/10/6 23:08
  **/
 public interface BaseMapperX<T> extends BaseMapper<T> {
+
+    /**
+     * 分页查询
+     * 支持将 {@link BaseMapper#selectPage(IPage, Wrapper)} 的查询结果封装成 Spring MVC 工具中自定义的 {@link PageData} 数据结构
+     * @param pageParams 分页参数
+     * @param queryWrapper 查询条件
+     * @return PageData 实例
+     */
+    default PageData<T> selectPage(PageParams pageParams, @Param("ew") Wrapper<T> queryWrapper) {
+        IPage<T> page = MyBatisPlusUtils.buildPage(pageParams);
+        selectPage(page, queryWrapper);
+        return new PageData<>(page.getRecords(), page.getTotal(), page.getPages());
+    }
 
     default T selectOne(String field, Object value) {
         return selectOne(new QueryWrapper<T>().eq(field, value));

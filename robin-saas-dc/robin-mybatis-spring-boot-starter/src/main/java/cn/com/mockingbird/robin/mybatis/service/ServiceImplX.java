@@ -1,6 +1,10 @@
 package cn.com.mockingbird.robin.mybatis.service;
 
 import cn.com.mockingbird.robin.mybatis.base.BaseMapperX;
+import cn.com.mockingbird.robin.mybatis.util.MyBatisPlusUtils;
+import cn.com.mockingbird.robin.webmvc.model.PageData;
+import cn.com.mockingbird.robin.webmvc.model.PageParams;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +54,18 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
             return false;
         }
         return true;
+    }
+
+    /**
+     * 分页查询
+     * 注意：暂时仅支持 eq 查询，不支持模糊查询、范围查询等，如需要自行构建 QueryWrapper 实例
+     * @param pageParams 分页
+     * @param entity 实体类分装的查询条件
+     * @return 分页数据
+     */
+    public PageData<T> selectPage(PageParams pageParams, T entity) {
+        QueryWrapper<T> queryWrapper = MyBatisPlusUtils.entity2Wrapper(entity);
+        return baseMapper.selectPage(pageParams, queryWrapper);
     }
 
 }

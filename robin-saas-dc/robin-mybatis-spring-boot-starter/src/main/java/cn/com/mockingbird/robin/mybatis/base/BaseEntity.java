@@ -1,7 +1,6 @@
 package cn.com.mockingbird.robin.mybatis.base;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serial;
@@ -19,6 +18,12 @@ public abstract class BaseEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -1L;
+
+    /**
+     * 自增主键
+     */
+    @TableId(type = IdType.AUTO)
+    private Long id;
     /**
      * 创建时间
      */
@@ -39,4 +44,9 @@ public abstract class BaseEntity implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedUser;
+    /**
+     * 是否删除
+     */
+    @TableLogic
+    private Boolean isDeleted;
 }

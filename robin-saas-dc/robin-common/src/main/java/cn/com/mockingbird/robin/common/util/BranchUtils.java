@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author zhaopeng
  * @date 2023/10/5 20:31
  **/
-public class BranchUtils {
+public final class BranchUtils {
 
     /**
      * if or else 处理
