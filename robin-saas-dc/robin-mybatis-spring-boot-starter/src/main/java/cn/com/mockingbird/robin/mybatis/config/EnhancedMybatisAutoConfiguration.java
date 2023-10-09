@@ -4,6 +4,7 @@ import cn.com.mockingbird.robin.mybatis.handler.MultiTenantHandler;
 import cn.com.mockingbird.robin.mybatis.handler.PublicFieldsHandler;
 import cn.com.mockingbird.robin.mybatis.injector.EnhancedSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -50,6 +51,8 @@ public class EnhancedMybatisAutoConfiguration {
         }
         // 分页插件
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        // 乐观锁插件
+        mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         return mybatisPlusInterceptor;
     }
 
