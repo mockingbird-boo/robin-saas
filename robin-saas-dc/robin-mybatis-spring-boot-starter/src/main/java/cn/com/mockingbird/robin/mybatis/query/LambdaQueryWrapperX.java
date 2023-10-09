@@ -15,7 +15,7 @@ import java.util.Collection;
  * @author zhaopeng
  * @date 2023/10/10 0:14
  **/
-@SuppressWarnings("all")
+@SuppressWarnings({"unused", "serial"})
 public class LambdaQueryWrapperX<T> extends LambdaQueryWrapper<T> {
 
     public LambdaQueryWrapperX<T> likeIfPresent(SFunction<T, ?> column, String val) {
@@ -25,16 +25,16 @@ public class LambdaQueryWrapperX<T> extends LambdaQueryWrapper<T> {
         return this;
     }
 
-    public LambdaQueryWrapperX<T> likeRightIfPresent(SFunction<T, ?> column, String val) {
+    public LambdaQueryWrapperX<T> likeLeftIfPresent(SFunction<T, ?> column, String val) {
         if (StringUtils.hasText(val)) {
-            return (LambdaQueryWrapperX<T>) super.likeRight(column, val);
+            return (LambdaQueryWrapperX<T>) super.likeLeft(column, val);
         }
         return this;
     }
 
-    public LambdaQueryWrapperX<T> likeLeftIfPresent(SFunction<T, ?> column, String val) {
+    public LambdaQueryWrapperX<T> likeRightIfPresent(SFunction<T, ?> column, String val) {
         if (StringUtils.hasText(val)) {
-            return (LambdaQueryWrapperX<T>) super.likeLeft(column, val);
+            return (LambdaQueryWrapperX<T>) super.likeRight(column, val);
         }
         return this;
     }

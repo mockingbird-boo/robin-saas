@@ -5,21 +5,18 @@ import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.io.Serial;
 import java.util.Collection;
 
 /**
  * mybatis-plus QueryWrapper 的扩展类
  * <p>
- * 支持 IfPresent 链式调用
+ * 支持 If Present 链式调用
  * @author zhaopeng
  * @date 2023/10/9 23:45
  **/
 
-@SuppressWarnings("all")
+@SuppressWarnings({"unused", "serial"})
 public class QueryWrapperX<T> extends QueryWrapper<T> {
-    @Serial
-    private static final long serialVersionUID = -2113413448060665583L;
 
     public QueryWrapperX<T> likeIfPresent(String column, String val) {
         if (StringUtils.hasText(val)) {
