@@ -20,6 +20,7 @@
         <module>robin-starter-quartz</module>
         <module>robin-banner-spring-boot-starter</module>
         <module>robin-mybatis-spring-boot-starter</module>
+        <module>robin-web-spring-boot-starter</module>
     </modules>
 
     <dependencyManagement>
