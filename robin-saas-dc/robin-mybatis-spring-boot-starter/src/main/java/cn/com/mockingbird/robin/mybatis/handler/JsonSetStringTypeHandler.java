@@ -1,7 +1,6 @@
 package cn.com.mockingbird.robin.mybatis.handler;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.TypeReference;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 
@@ -13,6 +12,7 @@ import java.util.Set;
  * @author zhaopeng
  * @date 2023/10/6 15:38
  **/
+@SuppressWarnings("unused")
 public class JsonSetStringTypeHandler extends FastjsonTypeHandler {
 
     public JsonSetStringTypeHandler(Class<?> type) {

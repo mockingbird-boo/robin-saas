@@ -21,6 +21,7 @@ import java.util.List;
  * @author zhaopeng
  * @date 2023/10/6 23:08
  **/
+@SuppressWarnings("unused")
 public interface BaseMapperX<T> extends BaseMapper<T> {
 
     /**
@@ -52,8 +53,12 @@ public interface BaseMapperX<T> extends BaseMapper<T> {
         return selectOne(new LambdaQueryWrapper<T>().eq(field1, value1).eq(field2, value2));
     }
 
-    default Long selectCount() {
-        return selectCount(new QueryWrapper<T>());
+    /**
+     * 查询总数据量
+     * @return 总数据量
+     */
+    default Long selectAllCount() {
+        return selectCount(new QueryWrapper<>());
     }
 
     default Long selectCount(String field, Object value) {

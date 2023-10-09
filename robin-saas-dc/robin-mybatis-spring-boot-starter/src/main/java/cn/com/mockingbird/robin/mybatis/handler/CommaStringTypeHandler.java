@@ -22,6 +22,7 @@ import java.util.List;
  **/
 @MappedJdbcTypes(JdbcType.VARCHAR)
 @MappedTypes(List.class)
+@SuppressWarnings("unused")
 public class CommaStringTypeHandler implements TypeHandler<List<String>> {
 
     private static final String COMMA = ",";

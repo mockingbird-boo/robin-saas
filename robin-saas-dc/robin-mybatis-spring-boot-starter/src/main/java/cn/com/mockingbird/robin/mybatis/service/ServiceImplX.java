@@ -19,6 +19,7 @@ import java.util.List;
  * @author zhaopeng
  * @date 2023/10/8 1:59
  **/
+@SuppressWarnings("unused")
 public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T> {
 
     private static final int DEFAULT_BATCH_SIZE = 30;

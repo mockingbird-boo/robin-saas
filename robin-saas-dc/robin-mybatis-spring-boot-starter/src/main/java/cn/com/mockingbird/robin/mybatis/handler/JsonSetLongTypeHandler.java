@@ -12,6 +12,7 @@ import java.util.Set;
  * @author zhaopeng
  * @date 2023/10/6 16:50
  **/
+@SuppressWarnings("unused")
 public class JsonSetLongTypeHandler extends FastjsonTypeHandler {
     
     public JsonSetLongTypeHandler(Class<?> type) {
