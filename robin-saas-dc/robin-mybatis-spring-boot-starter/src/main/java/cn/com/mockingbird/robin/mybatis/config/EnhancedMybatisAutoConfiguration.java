@@ -1,9 +1,11 @@
 package cn.com.mockingbird.robin.mybatis.config;
 
+import cn.com.mockingbird.robin.mybatis.handler.MultiTenantHandler;
 import cn.com.mockingbird.robin.mybatis.handler.PublicFieldsHandler;
 import cn.com.mockingbird.robin.mybatis.injector.EnhancedSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -42,9 +44,9 @@ public class EnhancedMybatisAutoConfiguration {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(MultiTenantProperties properties) {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
-        // TODO 必须保证多租户插件在分页插件之前，这个是 MyBatis-plus 的规定
         if (properties.getEnable()) {
-            // mybatisPlusInterceptor.addInnerInterceptor(new TenantLineInnerInterceptor(new TenantDatabaseHandler(properties)));
+            // 多租户插件（官方文档要求添加在分页插件前面）
+            mybatisPlusInterceptor.addInnerInterceptor(new TenantLineInnerInterceptor(new MultiTenantHandler(properties)));
         }
         // 分页插件
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());

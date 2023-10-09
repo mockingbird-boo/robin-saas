@@ -28,6 +28,7 @@ public class MultiTenantProperties {
 
     /**
      * 忽略的请求，例如登录接口这时候还不知道是租户信息
+     * 在后续的开发中也许会使用到，暂且保留
      */
     private Set<String> ignoredUrls = Collections.emptySet();
 
