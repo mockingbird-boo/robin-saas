@@ -1,10 +1,12 @@
 package cn.com.mockingbird.robin.mybatis.util;
 
 import cn.com.mockingbird.robin.common.util.StringCamelUtils;
+import cn.com.mockingbird.robin.mybatis.base.BaseEntity;
 import cn.com.mockingbird.robin.webmvc.model.PageParams;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
@@ -31,6 +33,7 @@ public class MyBatisPlusUtils {
 
     /**
      * 实体类转查询包装类 QueryWrapper
+     * 注意：暂时仅支持 eq 查询，不支持模糊查询、范围查询等，如需要可以自己创建 QueryWrapper 实例
      * @param entity 实体类实例
      * @return QueryWrapper
      * @param <T> 实体类泛型
@@ -39,36 +42,38 @@ public class MyBatisPlusUtils {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         try {
             Class<?> entityClass = entity.getClass();
-            Field[] fields = entityClass.getFields();
+            Field[] fields = entityClass.getDeclaredFields();
+            Class<?> entitySuperClass = entityClass.getSuperclass();
+            if (entitySuperClass == BaseEntity.class) {
+                Field[] declaredFields = entitySuperClass.getDeclaredFields();
+                fields = ArrayUtils.addAll(fields, declaredFields);
+            }
             for (Field field : fields) {
-                String name = field.getName();
-                if (StringUtils.equals(name, "serialVersionUID")) {
+                String fieldName = field.getName();
+                String columnName = StringCamelUtils.humpToUnderline(fieldName);
+                TableField fieldAnnotation = field.getAnnotation(TableField.class);
+                // 不存在的列或序列化字段可以忽略
+                if ((fieldAnnotation != null && !fieldAnnotation.exist()) || StringUtils.equals(fieldName, "serialVersionUID")) {
                     continue;
                 }
-                String column = StringCamelUtils.humpToUnderline(name);
-                TableField fieldAnnotation = field.getAnnotation(TableField.class);
+                // 如果通过 @TableField 注解标记了列名，那么以该注解标记的列名优先
                 if (fieldAnnotation != null && StringUtils.isNotBlank(fieldAnnotation.value())) {
-                    column = fieldAnnotation.value();
+                    columnName = fieldAnnotation.value();
                 }
-                Method method = entityClass.getDeclaredMethod("get" + captureName(name), (Class<?>) null);
-                Object value = method.invoke(entity);
-                if (value instanceof String finalValue) {
-                    queryWrapper.eq(StringUtils.isNotBlank(finalValue), column, value);
+                // 获取字段的 get 方法
+                Method method = entityClass.getMethod("get" + cn.com.mockingbird.robin.common.util.StringUtils.upperTheFirstChar(fieldName));
+                // 执行 get 方法获取对象字段值
+                Object fieldValue = method.invoke(entity);
+                if (fieldValue instanceof String stringFieldValue) {
+                    queryWrapper.eq(StringUtils.isNotBlank(stringFieldValue), columnName, fieldValue);
                 } else {
-                    queryWrapper.eq(value != null, column, value);
+                    queryWrapper.eq(fieldValue != null, columnName, fieldValue);
                 }
             }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
         return queryWrapper;
-    }
-
-    private static String captureName(String str) {
-        // 进行字母的ascii编码前移，效率要高于截取字符串进行转换的操作
-        char[] cs = str.toCharArray();
-        cs[0] -= 32;
-        return String.valueOf(cs);
     }
 
 }

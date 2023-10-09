@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * mybatis-plus BaseMapper 的扩展接口
- * TODO 还可以增加分页查询功能的扩展
  *
  * @author zhaopeng
  * @date 2023/10/6 23:08

@@ -58,7 +58,7 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
 
     /**
      * 分页查询
-     * 注意：暂时仅支持 eq 查询，不支持模糊查询、范围查询等，如需要自行构建 QueryWrapper 实例
+     * 注意：暂时仅支持 eq 查询，不支持模糊查询、范围查询等，如需要可以自己创建 QueryWrapper 实例
      * @param pageParams 分页
      * @param entity 实体类分装的查询条件
      * @return 分页数据
