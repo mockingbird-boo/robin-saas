@@ -1,13 +1,20 @@
 package cn.com.mockingbird.robin.mybatis.config;
 
+import cn.com.mockingbird.robin.mybatis.handler.DataEncryptHandler;
 import cn.com.mockingbird.robin.mybatis.handler.MultiTenantHandler;
 import cn.com.mockingbird.robin.mybatis.handler.PublicFieldsHandler;
 import cn.com.mockingbird.robin.mybatis.injector.EnhancedSqlInjector;
+import cn.com.mockingbird.robin.mybatis.security.AesEncryptor;
+import cn.com.mockingbird.robin.mybatis.security.Algorithm;
+import cn.com.mockingbird.robin.mybatis.security.Base64Encryptor;
+import cn.com.mockingbird.robin.mybatis.security.DataEncryptor;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/10/6 1:55
  **/
 @Configuration
-@EnableConfigurationProperties(MultiTenantProperties.class)
+@EnableConfigurationProperties(EnhancedMybatisProperties.class)
 public class EnhancedMybatisAutoConfiguration {
 
     /**
@@ -43,17 +50,39 @@ public class EnhancedMybatisAutoConfiguration {
     }
 
     @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(MultiTenantProperties properties) {
+    public MybatisPlusInterceptor mybatisPlusInterceptor(EnhancedMybatisProperties properties) {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
-        if (properties.getEnable()) {
+        if (properties.getEnableMultiTenant()) {
             // 多租户插件（官方文档要求添加在分页插件前面）
             mybatisPlusInterceptor.addInnerInterceptor(new TenantLineInnerInterceptor(new MultiTenantHandler(properties)));
         }
+        if (properties.getEnableOptimisticLock()) {
+            // 乐观锁插件
+            mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        }
+        if (properties.getEnableIllegalSqlIntercept()) {
+            // 非法 SQL 拦截插件
+            mybatisPlusInterceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
+        }
         // 分页插件
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
-        // 乐观锁插件
-        mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         return mybatisPlusInterceptor;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(DataEncryptor.class)
+    @ConditionalOnProperty(prefix = "spring.mybatis-enhance", name = "enableDataEncrypt", havingValue = "true")
+    public DataEncryptor dataEncryptor(EnhancedMybatisProperties enhancedMybatisProperties) {
+        Algorithm algorithm = enhancedMybatisProperties.getDataEncrypt().getAlgorithm();
+        return switch (algorithm) {
+            case BASE64 -> new Base64Encryptor();
+            case AES -> new AesEncryptor(enhancedMybatisProperties);
+        };
+    }
+
+    @Bean
+    public DataEncryptHandler<?> encryptHandler() {
+        return new DataEncryptHandler<>();
     }
 
 }

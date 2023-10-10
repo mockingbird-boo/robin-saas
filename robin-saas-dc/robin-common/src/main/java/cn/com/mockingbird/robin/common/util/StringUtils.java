@@ -1,5 +1,10 @@
 package cn.com.mockingbird.robin.common.util;
 
+import org.springframework.util.CollectionUtils;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 字符串工具类
  * <p>
@@ -11,6 +16,8 @@ package cn.com.mockingbird.robin.common.util;
  **/
 public final class StringUtils {
 
+    public static final String COMMA = ",";
+
     /**
      * 首字符大写
      * @param str 目标字符串
@@ -21,6 +28,28 @@ public final class StringUtils {
         char[] cs = str.toCharArray();
         cs[0] -= 32;
         return String.valueOf(cs);
+    }
+
+    /**
+     * 逗号分隔的字符串转 List<String>
+     * @param str 逗号分隔的字符
+     * @return List<String> 实例
+     */
+    public static List<String> commaStringToList(String str) {
+        if (str == null) {
+            return null;
+        }
+        return Arrays.asList(str.trim().split(COMMA));
+    }
+
+    public static String listToCommaString(List<String> strList) {
+        if (strList == null) {
+            return null;
+        }
+        if (strList.isEmpty()) {
+            return "";
+        }
+        return String.join(COMMA, strList);
     }
 
 }

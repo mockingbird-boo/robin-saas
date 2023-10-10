@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.mybatis.handler;
 
 import cn.com.mockingbird.robin.common.user.UserHolder;
-import cn.com.mockingbird.robin.mybatis.config.MultiTenantProperties;
+import cn.com.mockingbird.robin.mybatis.config.EnhancedMybatisProperties;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
@@ -23,9 +23,9 @@ public class MultiTenantHandler implements TenantLineHandler {
 
     private final Set<String> ignoredTables = new HashSet<>();
 
-    public MultiTenantHandler(MultiTenantProperties multiTenantProperties) {
+    public MultiTenantHandler(EnhancedMybatisProperties properties) {
         // 大小写数据表名都添加，以防数据表定义的习惯不统一
-        multiTenantProperties.getIgnoredTables().forEach(item -> {
+        properties.getIgnoredTables().forEach(item -> {
             ignoredTables.add(item.toLowerCase());
             ignoredTables.add(item.toUpperCase());
         });
