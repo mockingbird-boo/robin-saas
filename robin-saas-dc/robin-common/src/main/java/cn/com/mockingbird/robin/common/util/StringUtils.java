@@ -42,6 +42,11 @@ public final class StringUtils {
         return Arrays.asList(str.trim().split(COMMA));
     }
 
+    /**
+     * List<String> 转逗号分隔的字符串
+     * @param strList List<String>
+     * @return 逗号分隔的字符串
+     */
     public static String listToCommaString(List<String> strList) {
         if (strList == null) {
             return null;

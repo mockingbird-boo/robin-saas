@@ -17,6 +17,11 @@ public enum ResponseCode {
     OK(200, "success"),
 
     /**
+     * 请求参数校验失败
+     */
+    BAD_REQUEST(400, "请求参数校验失败"),
+
+    /**
      * 接口处理失败
      */
     FAIL(500, "fail"),
