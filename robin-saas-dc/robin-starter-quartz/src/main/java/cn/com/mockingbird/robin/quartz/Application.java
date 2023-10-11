@@ -15,8 +15,6 @@ import org.springframework.context.annotation.Import;
  * @date 2023/9/30 11:50
  **/
 @SpringBootApplication
-//@ComponentScan(value = {"cn.com.mockingbird.robin.quartz", "cn.com.mockingbird.robin.banner"})
-//@Import(BannerAutoConfiguration.class)
 @MapperScan("cn.com.mockingbird.robin.quartz.mapper")
 public class Application {
 
