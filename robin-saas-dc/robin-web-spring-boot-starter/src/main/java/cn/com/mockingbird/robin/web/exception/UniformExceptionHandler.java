@@ -35,6 +35,7 @@ public class UniformExceptionHandler {
      * @return 使用 {@link ResponseData} 封装的异常响应实例
      */
     @ExceptionHandler(value = {BindException.class, ValidationException.class, MethodArgumentNotValidException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseData<String> handleValidatedException(Exception e) {
         ResponseData<String> responseData;
         if (e instanceof MethodArgumentNotValidException ex) {

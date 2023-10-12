@@ -1,5 +1,6 @@
 package cn.com.mockingbird.robin.mybatis.base;
 
+import cn.com.mockingbird.robin.mybatis.query.Condition;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
