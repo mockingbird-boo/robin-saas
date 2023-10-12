@@ -8,16 +8,18 @@ import cn.com.mockingbird.robin.mybatis.security.AesEncryptor;
 import cn.com.mockingbird.robin.mybatis.security.Algorithm;
 import cn.com.mockingbird.robin.mybatis.security.Base64Encryptor;
 import cn.com.mockingbird.robin.mybatis.security.DataEncryptor;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
 
 /**
  * Mybatis 自动配置类
@@ -25,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
  * @author zhaopeng
  * @date 2023/10/6 1:55
  **/
-@Configuration
+@AutoConfiguration(after = MybatisPlusAutoConfiguration.class)
 @EnableConfigurationProperties(EnhancedMybatisProperties.class)
 public class EnhancedMybatisAutoConfiguration {
 
