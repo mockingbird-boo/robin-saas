@@ -21,6 +21,8 @@
         <module>robin-banner-spring-boot-starter</module>
         <module>robin-mybatis-spring-boot-starter</module>
         <module>robin-web-spring-boot-starter</module>
+        <module>robin-cache-spring-boot-starter</module>
+        <module>robin-redis-spring-boot-starter</module>
     </modules>
 
     <dependencyManagement>
