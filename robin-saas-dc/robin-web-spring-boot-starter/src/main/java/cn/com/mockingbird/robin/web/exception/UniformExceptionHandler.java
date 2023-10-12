@@ -27,6 +27,18 @@ import java.util.stream.Collectors;
 public class UniformExceptionHandler {
 
     /**
+     * 处理 {@link IllegalArgumentException} 异常
+     * 使用 {@link org.springframework.util.Assert} 断言失败时就会抛出该异常
+     * @param e IllegalArgumentException 实例
+     * @return 使用 {@link ResponseData} 封装的异常响应实例
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseData<String> handleIllegalArgumentException(IllegalArgumentException e) {
+        return ResponseData.failure(ResponseCode.FAIL.getCode(), e.getMessage());
+    }
+
+    /**
      * 单独拦截参数校验的三个异常：
      * {@link MethodArgumentNotValidException}
      * {@link ConstraintViolationException}

@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
  * <p>
  * 继承 {@link Default} 的目的是使校验注解上没有通过 group 属性指定校验分组的字段
  * 也能在 {@link Validated} 注解指定了校验分组的情况下进行校验
- * @see
+ * @see Demo 例子
  *
  * @author zhaopeng
  * @date 2023/10/11 23:56
