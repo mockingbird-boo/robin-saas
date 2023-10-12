@@ -3,6 +3,7 @@ package cn.com.mockingbird.robin.mybatis.query.process;
 import cn.com.mockingbird.robin.mybatis.query.Condition;
 import cn.com.mockingbird.robin.mybatis.query.ConditionProcessor;
 import cn.com.mockingbird.robin.mybatis.query.Logic;
+import cn.com.mockingbird.robin.mybatis.query.QueryCondition;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import java.lang.annotation.Annotation;
@@ -16,8 +17,8 @@ import java.lang.annotation.Annotation;
 public class NeConditionProcessor implements ConditionProcessor {
 
     @Override
-    public <T> void process(QueryWrapper<T> queryWrapper, String column, Object value) {
-        queryWrapper.ne(column, value);
+    public <T> void process(QueryWrapper<T> queryWrapper, QueryCondition queryCondition) {
+        queryWrapper.ne(queryCondition.getColumn(), queryCondition.getValue());
     }
 
     @Override

@@ -15,6 +15,9 @@ import java.lang.annotation.*;
 @Documented
 public @interface Condition {
 
+    /**
+     * 等于
+     */
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
@@ -22,6 +25,9 @@ public @interface Condition {
         Logic logic() default Logic.AND;
     }
 
+    /**
+     * 不等于
+     */
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
@@ -29,6 +35,9 @@ public @interface Condition {
         Logic logic() default Logic.AND;
     }
 
+    /**
+     * 模糊查询
+     */
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
@@ -36,6 +45,9 @@ public @interface Condition {
         Logic logic() default Logic.AND;
     }
 
+    /**
+     * 大于
+     */
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
@@ -43,6 +55,9 @@ public @interface Condition {
         Logic logic() default Logic.AND;
     }
 
+    /**
+     * 小于
+     */
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
@@ -50,6 +65,9 @@ public @interface Condition {
         Logic logic() default Logic.AND;
     }
 
+    /**
+     *
+     */
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented

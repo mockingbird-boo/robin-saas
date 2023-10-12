@@ -9,22 +9,22 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.lang.annotation.Annotation;
 
 /**
- * EQ 条件处理器
+ * IN 条件处理器
  *
  * @author zhaopeng
- * @date 2023/10/12 13:54
+ * @date 2023/10/12 22:54
  **/
-public class EqConditionProcessor implements ConditionProcessor {
+public class InConditionProcessor implements ConditionProcessor {
 
     @Override
     public <T> void process(QueryWrapper<T> queryWrapper, QueryCondition queryCondition) {
-        queryWrapper.eq(queryCondition.getColumn(), queryCondition.getValue());
+        queryWrapper.in(queryCondition.getColumn(), queryCondition.getValue());
     }
 
     @Override
     public <T> ConditionProcessor preProcess(Annotation annotation, QueryWrapper<T> queryWrapper) {
-        Condition.EQ eq = (Condition.EQ) annotation;
-        if (eq.logic() == Logic.OR) {
+        Condition.IN in = (Condition.IN) annotation;
+        if (in.logic() == Logic.OR) {
             queryWrapper.or();
         }
         return this;

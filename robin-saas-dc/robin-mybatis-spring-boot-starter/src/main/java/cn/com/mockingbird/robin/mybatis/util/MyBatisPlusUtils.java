@@ -2,6 +2,7 @@ package cn.com.mockingbird.robin.mybatis.util;
 
 import cn.com.mockingbird.robin.common.util.StringCamelUtils;
 import cn.com.mockingbird.robin.mybatis.base.BaseEntity;
+import cn.com.mockingbird.robin.mybatis.query.QueryWrapperBuilder;
 import cn.com.mockingbird.robin.webmvc.model.PageParams;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -34,10 +35,13 @@ public class MyBatisPlusUtils {
     /**
      * 实体类转查询包装类 QueryWrapper
      * 注意：暂时仅支持 eq 查询，不支持模糊查询、范围查询等，如需要可以自己创建 QueryWrapper 实例
+     * 已过期，功能局限性比较大，请使用 {@link QueryWrapperBuilder#beanToQueryWrapper(Object)}
      * @param entity 实体类实例
      * @return QueryWrapper
      * @param <T> 实体类泛型
+     * @see QueryWrapperBuilder#beanToQueryWrapper(Object)
      */
+    @Deprecated
     public static <T> QueryWrapper<T> entity2Wrapper(T entity) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         try {
