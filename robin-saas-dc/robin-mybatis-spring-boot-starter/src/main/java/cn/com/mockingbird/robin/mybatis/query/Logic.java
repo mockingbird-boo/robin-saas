@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.mybatis.query;
 
 /**
- * 关系运算
+ * 关系运算枚举
  *
  * @author zhaopeng
  * @date 2023/10/12 10:42

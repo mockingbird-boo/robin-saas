@@ -2,11 +2,15 @@ package cn.com.mockingbird.robin.mybatis.query;
 
 import cn.com.mockingbird.robin.common.util.StringCamelUtils;
 import cn.com.mockingbird.robin.mybatis.base.BaseEntity;
+import cn.com.mockingbird.robin.mybatis.query.process.EqConditionProcessor;
+import cn.com.mockingbird.robin.mybatis.query.process.NeConditionProcessor;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * QueryWrapper 工具类
@@ -15,6 +19,8 @@ import java.lang.reflect.Field;
  * @date 2023/10/12 11:19
  **/
 public class QueryWrapperBuilder {
+
+    private static final Map<Class<? extends Annotation>, ConditionProcessor> PROCESSORS = new HashMap<>();
 
     public static <T> QueryWrapper<T> beanToQueryWrapper(T bean) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
@@ -29,12 +35,7 @@ public class QueryWrapperBuilder {
                     Annotation[] annotations = field.getAnnotations();
                     for (Annotation annotation : annotations) {
                         final Class<? extends Annotation> annotationType = annotation.annotationType();
-                        // TODO
-                        if (Condition.EQ.class == annotationType) {
-                            Condition.EQ eq = (Condition.EQ) annotation;
-                            processLogicCondition(eq.logic(), queryWrapper);
-                            queryWrapper.eq(columnName, fieldValue);
-                        }
+                        PROCESSORS.get(annotationType).preProcess(annotation, queryWrapper).process(queryWrapper, columnName, fieldValue);
                     }
                 }
             }
@@ -44,10 +45,9 @@ public class QueryWrapperBuilder {
         return queryWrapper;
     }
 
-    private static <T> void processLogicCondition(Logic logic, QueryWrapper<T> queryWrapper) {
-        if (logic == Logic.OR) {
-            queryWrapper.or();
-        }
+    static {
+        PROCESSORS.put(Condition.EQ.class, new EqConditionProcessor());
+        PROCESSORS.put(Condition.NE.class, new NeConditionProcessor());
     }
 
 }

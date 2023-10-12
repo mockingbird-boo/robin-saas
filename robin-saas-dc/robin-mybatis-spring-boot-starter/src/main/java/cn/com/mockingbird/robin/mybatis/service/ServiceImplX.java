@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.mybatis.service;
 
 import cn.com.mockingbird.robin.mybatis.base.BaseMapperX;
-import cn.com.mockingbird.robin.mybatis.util.MyBatisPlusUtils;
+import cn.com.mockingbird.robin.mybatis.query.QueryWrapperBuilder;
 import cn.com.mockingbird.robin.webmvc.model.PageData;
 import cn.com.mockingbird.robin.webmvc.model.PageParams;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -65,7 +65,7 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
      * @return 分页数据
      */
     public PageData<T> selectPage(PageParams pageParams, T entity) {
-        QueryWrapper<T> queryWrapper = MyBatisPlusUtils.entity2Wrapper(entity);
+        QueryWrapper<T> queryWrapper = QueryWrapperBuilder.beanToQueryWrapper(entity);
         return baseMapper.selectPage(pageParams, queryWrapper);
     }
 
