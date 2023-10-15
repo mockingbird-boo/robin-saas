@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @author zhaopeng
  * @date 2023/10/14 3:40
  **/
+@SuppressWarnings("unused")
 public record RedisService(RedisTemplate<String, Object> redisTemplate) {
 
     /**

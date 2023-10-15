@@ -4,6 +4,7 @@ import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.web.advice.InitBinderAdvice;
 import cn.com.mockingbird.robin.web.advice.ResponseDataAdvice;
 import cn.com.mockingbird.robin.web.exception.UniformExceptionHandler;
+import cn.com.mockingbird.robin.web.filter.RequestTraceFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -11,7 +12,9 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
@@ -52,6 +55,16 @@ public class WebAutoConfiguration {
             jacksonObjectMapperBuilder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(Standard.DateTimePattern.DATETIME)));
             jacksonObjectMapperBuilder.deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(Standard.DateTimePattern.DATE)));
         };
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "spring.web.enhance.trace", name = "enable", havingValue = "true", matchIfMissing = true)
+    public FilterRegistrationBean<RequestTraceFilter> requestTraceFilter() {
+        FilterRegistrationBean<RequestTraceFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new RequestTraceFilter());
+        filterRegistrationBean.setOrder(Integer.MIN_VALUE + 100);
+        filterRegistrationBean.addUrlPatterns("/*");
+        return filterRegistrationBean;
     }
 
 }

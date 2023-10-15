@@ -28,12 +28,25 @@ public final class BranchUtils {
     /**
      * 存在（非空）or 不存在（空）处理
      * @param object 判断主体
-     * @return PresentOrElseHandler 处理逻辑
+     * @return {@link PresentOrElseHandler} 处理逻辑
      */
     public static PresentOrElseHandler<?> nonNullOrElse(Object object) {
         return ((consumer, nullAction) ->
                 isTureOrFalse(Objects.nonNull(object)).trueOrFalseHandle(
                         () -> consumer.accept(object), nullAction));
+    }
+
+    /**
+     * 存在（非空）处理
+     * @param object 判断主体
+     * @return {@link PresentHandler} 处理逻辑
+     */
+    public static PresentHandler<?> nonNull(Object object) {
+        return consumer -> {
+            if (Objects.nonNull(object)) {
+                consumer.accept(object);
+            }
+        };
     }
 
 }

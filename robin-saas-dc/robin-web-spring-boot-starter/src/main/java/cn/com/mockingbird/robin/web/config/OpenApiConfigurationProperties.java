@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2023/10/11 22:14
  **/
 @Data
-@ConfigurationProperties(prefix = "spring.open-api")
+@ConfigurationProperties(prefix = "spring.web.enhance.open-api")
 public class OpenApiConfigurationProperties {
 
     private Boolean enable = Boolean.FALSE;

@@ -13,8 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author zhaopeng
  * @date 2023/10/11 22:11
  **/
-@AutoConfiguration
-@ConditionalOnProperty(prefix = "spring.open-api", name = "enable", havingValue = "true")
+@AutoConfiguration(after = WebAutoConfiguration.class)
+@ConditionalOnProperty(prefix = "spring.web.enhance.open-api", name = "enable", havingValue = "true")
 @EnableConfigurationProperties(OpenApiConfigurationProperties.class)
 public class OpenApiConfiguration implements WebMvcConfigurer {
 

@@ -18,4 +18,7 @@ public interface Standard {
         String MS_DATETIME = "yyyy-MM-dd HH:mm:ss.SSS";
     }
 
+    interface Str {
+        String EMPTY = "";
+    }
 }
