@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.common.trace;
+package cn.com.mockingbird.robin.web.util;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -17,6 +17,7 @@ import java.util.Objects;
  * @author zhaopeng
  * @date 2023/10/3 0:17
  **/
+@SuppressWarnings("unused")
 public class MethodTracker {
 
     /**

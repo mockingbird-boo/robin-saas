@@ -28,12 +28,12 @@ public class TtlMDCAdapter implements MDCAdapter {
     private static final int WRITE_OPERATION = 1;
     private static final int READ_OPERATION = 2;
 
-    private static TtlMDCAdapter ttlMDCAdapter = null;
-    private static ThreadLocal<Integer> lastOperationContext = null;
+    private final static TtlMDCAdapter ttlMDCAdapter;
+    private final static ThreadLocal<Integer> LAST_OP_CONTEXT;
 
     static {
         ttlMDCAdapter = new TtlMDCAdapter();
-        lastOperationContext = new ThreadLocal<>();
+        LAST_OP_CONTEXT = new ThreadLocal<>();
         // 替换 MDC 的 MDCAdapter
         MDC.mdcAdapter = ttlMDCAdapter;
     }
@@ -89,7 +89,7 @@ public class TtlMDCAdapter implements MDCAdapter {
 
     @Override
     public void clear() {
-        lastOperationContext.set(WRITE_OPERATION);
+        LAST_OP_CONTEXT.set(WRITE_OPERATION);
         copyOnInheritThreadLocal.remove();
     }
 
@@ -100,7 +100,7 @@ public class TtlMDCAdapter implements MDCAdapter {
 
     @Override
     public void setContextMap(Map<String, String> contextMap) {
-        lastOperationContext.set(WRITE_OPERATION);
+        LAST_OP_CONTEXT.set(WRITE_OPERATION);
         Map<String, String> newMap = Collections.synchronizedMap(new HashMap<>());
         newMap.putAll(contextMap);
         copyOnInheritThreadLocal.set(newMap);
@@ -128,8 +128,8 @@ public class TtlMDCAdapter implements MDCAdapter {
 
     @SuppressWarnings("all")
     private Integer getAndSetLastOperation(int operation) {
-        Integer lastOperation = lastOperationContext.get();
-        lastOperationContext.set(operation);
+        Integer lastOperation = LAST_OP_CONTEXT.get();
+        LAST_OP_CONTEXT.set(operation);
         return lastOperation;
     }
 

@@ -1,6 +1,7 @@
 package cn.com.mockingbird.robin.common.util;
 
-import org.springframework.util.CollectionUtils;
+import cn.com.mockingbird.robin.common.constant.Standard;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,4 +58,12 @@ public final class StringUtils {
         return String.join(COMMA, strList);
     }
 
+    /**
+     * 毫秒格式化成日期时间字符串
+     * @param millis 毫秒时间戳
+     * @return 日期时间字符串
+     */
+    public static String millis2String(long millis) {
+        return DateFormatUtils.format(millis, Standard.DateTimePattern.DATETIME);
+    }
 }

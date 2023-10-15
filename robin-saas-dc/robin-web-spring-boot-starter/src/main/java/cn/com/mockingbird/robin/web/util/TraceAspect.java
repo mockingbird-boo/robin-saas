@@ -1,8 +1,7 @@
-package cn.com.mockingbird.robin.common.trace;
+package cn.com.mockingbird.robin.web.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TraceAspect {
 
     @SuppressWarnings("all")
-    @Pointcut("@annotation(cn.com.mockingbird.robin.common.trace.Trace)")
+    @Pointcut("@annotation(cn.com.mockingbird.robin.web.util.Trace)")
     public void tracePointCut() {}
 
     /**
@@ -67,8 +66,8 @@ public class TraceAspect {
                 "方法追踪 ==> [{}]，耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]" :
                 "方法追踪 ==> [{}]，[{}] 耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]";
 
-        String start = millis2String(trackingData.getStartMillis());
-        String end = millis2String(trackingData.getEndMillis());
+        String start = cn.com.mockingbird.robin.common.util.StringUtils.millis2String(trackingData.getStartMillis());
+        String end = cn.com.mockingbird.robin.common.util.StringUtils.millis2String(trackingData.getEndMillis());
         List<String> params = new ArrayList<>();
         params.add(path);
         if (StringUtils.isNotBlank(description)) {
@@ -118,15 +117,6 @@ public class TraceAspect {
             }
         }
         return params;
-    }
-
-    /**
-     * 毫秒格式化成日期时间字符串
-     * @param millis 毫秒时间戳
-     * @return 日期时间字符串
-     */
-    private String millis2String(long millis) {
-        return DateFormatUtils.format(millis, "yyyy-MM-dd HH:mm:ss");
     }
 
 }
