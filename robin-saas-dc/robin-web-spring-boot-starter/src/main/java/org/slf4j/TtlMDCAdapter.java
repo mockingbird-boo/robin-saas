@@ -28,14 +28,14 @@ public class TtlMDCAdapter implements MDCAdapter {
     private static final int WRITE_OPERATION = 1;
     private static final int READ_OPERATION = 2;
 
-    private final static TtlMDCAdapter ttlMDCAdapter;
+    private final static TtlMDCAdapter TTL_MDC_ADAPTER;
     private final static ThreadLocal<Integer> LAST_OP_CONTEXT;
 
     static {
-        ttlMDCAdapter = new TtlMDCAdapter();
+        TTL_MDC_ADAPTER = new TtlMDCAdapter();
         LAST_OP_CONTEXT = new ThreadLocal<>();
         // 替换 MDC 的 MDCAdapter
-        MDC.mdcAdapter = ttlMDCAdapter;
+        MDC.mdcAdapter = TTL_MDC_ADAPTER;
     }
 
     /**
@@ -44,7 +44,7 @@ public class TtlMDCAdapter implements MDCAdapter {
      */
     @SuppressWarnings("all")
     public static MDCAdapter getInstance() {
-        return ttlMDCAdapter;
+        return TTL_MDC_ADAPTER;
     }
 
     private final ThreadLocalMapOfStacks threadLocalMapOfDeques = new ThreadLocalMapOfStacks();

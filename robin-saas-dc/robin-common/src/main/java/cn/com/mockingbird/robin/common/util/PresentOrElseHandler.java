@@ -16,6 +16,7 @@ public interface PresentOrElseHandler<T> {
      * @param consumer 值不为空时执行消费操作
      * @param nullAction 值为空时执行其他的操作
      */
+    @SuppressWarnings("unused")
     void presentOrElseHandle(Consumer<? super T> consumer, Runnable nullAction);
 
 }
