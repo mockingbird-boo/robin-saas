@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.web.filter;
 
 import cn.com.mockingbird.robin.common.util.BranchUtils;
-import cn.com.mockingbird.robin.web.util.MDCUtils;
+import cn.com.mockingbird.robin.web.trace.MDCUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

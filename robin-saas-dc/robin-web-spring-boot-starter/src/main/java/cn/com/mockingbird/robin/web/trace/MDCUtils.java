@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.util;
+package cn.com.mockingbird.robin.web.trace;
 
 import cn.com.mockingbird.robin.common.util.UUIDUtils;
 import org.slf4j.MDC;
@@ -9,6 +9,7 @@ import org.slf4j.MDC;
  * @author zhaopeng
  * @date 2023/10/15 22:57
  **/
+@SuppressWarnings("unused")
 public class MDCUtils {
 
     /**

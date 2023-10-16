@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.util;
+package cn.com.mockingbird.robin.web.trace;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.event.Level;
-import org.springframework.stereotype.Component;
+import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -24,11 +24,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 @Slf4j
 @Aspect
-@Component
+@Order(0)
 public class TraceAspect {
 
     @SuppressWarnings("all")
-    @Pointcut("@annotation(cn.com.mockingbird.robin.web.util.Trace)")
+    @Pointcut("@annotation(cn.com.mockingbird.robin.web.trace.Trace)")
     public void tracePointCut() {}
 
     /**
@@ -96,7 +96,7 @@ public class TraceAspect {
         String methodName = signature.getName();
 
         StringBuilder source = new StringBuilder();
-        source.append(className).append(".").append(methodName).append("（");
+        source.append(className).append(".").append(methodName).append("(");
 
         Map<String, String> params = getMethodParams(signature);
         if (!params.isEmpty()) {

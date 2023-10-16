@@ -18,7 +18,21 @@ public interface Standard {
         String MS_DATETIME = "yyyy-MM-dd HH:mm:ss.SSS";
     }
 
+    /**
+     * 字符串常量标准
+     */
     interface Str {
         String EMPTY = "";
+    }
+
+    /**
+     * 请求头标准
+     */
+    interface RequestHeader {
+
+        String TRACE_HEADER = "x-traceId-header";
+
+        String TOKEN_HEADER = "x-token-header";
+
     }
 }
