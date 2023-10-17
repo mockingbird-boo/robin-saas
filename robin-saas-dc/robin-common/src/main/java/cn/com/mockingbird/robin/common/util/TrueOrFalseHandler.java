@@ -7,7 +7,7 @@ package cn.com.mockingbird.robin.common.util;
  * @date 2023/10/5 20:28
  **/
 @FunctionalInterface
-public interface BranchHandler {
+public interface TrueOrFalseHandler {
     /**
      * true or false 处理接口
      *

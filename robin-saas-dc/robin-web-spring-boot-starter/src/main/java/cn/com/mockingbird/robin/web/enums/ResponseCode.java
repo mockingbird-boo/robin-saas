@@ -22,6 +22,11 @@ public enum ResponseCode {
     BAD_REQUEST(400, "请求参数校验失败"),
 
     /**
+     * 请求冲突
+     */
+    CONFLICT(409, "请求冲突"),
+
+    /**
      * 后台处理失败
      */
     FAIL(500, "fail"),

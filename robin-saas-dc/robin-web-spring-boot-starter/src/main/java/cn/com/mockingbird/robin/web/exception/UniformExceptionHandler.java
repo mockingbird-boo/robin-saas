@@ -1,5 +1,6 @@
 package cn.com.mockingbird.robin.web.exception;
 
+import cn.com.mockingbird.robin.common.exception.BaseRuntimeException;
 import cn.com.mockingbird.robin.web.enums.ResponseCode;
 import cn.com.mockingbird.robin.web.model.ResponseData;
 import jakarta.validation.ConstraintViolation;
@@ -25,6 +26,16 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestControllerAdvice
 public class UniformExceptionHandler {
+
+    /**
+     * 处理 {@link BaseRuntimeException} 异常
+     * @param e 异常实例
+     * @return 使用 {@link ResponseData} 封装的异常响应实例
+     */
+    @ExceptionHandler(BaseRuntimeException.class)
+    public ResponseData<String> handleBaseRuntimeException(BaseRuntimeException e) {
+        return ResponseData.failure(e.getCode(), e.getMessage());
+    }
 
     /**
      * 处理 {@link IllegalArgumentException} 异常

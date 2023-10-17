@@ -31,41 +31,21 @@ public @interface Idempotent {
     }
 
     /**
-     * 运行环境：单机和分布式
-     */
-    enum Environment {
-        /**
-         * 单机
-         */
-        STANDALONE,
-        /**
-         * 分布式
-         */
-        DISTRIBUTED
-    }
-
-    /**
      * 策略，默认为方法参数策略
      * @return 策略类型
      */
     Strategy strategy() default Strategy.PARAM;
 
     /**
-     * 运行环境，默认为分布式
-     * @return 运行环境
+     * 间隔，采用参数策略下有意义
+     * @return 间隔时长，单位：秒
      */
-    Environment env() default Environment.STANDALONE;
-
-    /**
-     * 超时时间
-     * @return 超时时间，单位：秒
-     */
-    long timeout() default 5;
+    long interval() default 5;
 
     /**
      * 提示内容
      * @return 提示内容字符串
      */
-    String message() default "不允许重复提交，请稍后重试";
+    String message() default "幂等性冲突";
 
 }

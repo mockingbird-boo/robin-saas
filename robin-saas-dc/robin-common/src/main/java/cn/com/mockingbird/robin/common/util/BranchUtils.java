@@ -15,7 +15,7 @@ public final class BranchUtils {
      * @param value 布尔结果
      * @return if or else 处理逻辑
      */
-    public static BranchHandler isTureOrFalse(boolean value) {
+    public static TrueOrFalseHandler isTureOrFalse(boolean value) {
         return ((trueHandler, falseHandler) -> {
             if (value) {
                 trueHandler.run();
@@ -30,6 +30,7 @@ public final class BranchUtils {
      * @param object 判断主体
      * @return {@link PresentOrElseHandler} 处理逻辑
      */
+    @SuppressWarnings("unused")
     public static PresentOrElseHandler<?> nonNullOrElse(Object object) {
         return ((consumer, nullAction) ->
                 isTureOrFalse(Objects.nonNull(object)).trueOrFalseHandle(
@@ -47,6 +48,22 @@ public final class BranchUtils {
                 consumer.accept(object);
             }
         };
+    }
+
+    /**
+     * if or else 处理，带返回结果
+     * @param value 判断主体
+     * @return 处理逻辑的结果值
+     * @param <T> 结果泛型
+     */
+    public static <T> TrueOrFalseWithReturnHandler<T> isTureOrFalseWithReturn(boolean value) {
+        return ((trueHandler, falseHandler) -> {
+            if (value) {
+                return trueHandler.get();
+            } else {
+                return falseHandler.get();
+            }
+        });
     }
 
 }

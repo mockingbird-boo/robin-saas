@@ -30,9 +30,9 @@ public interface Standard {
      */
     interface RequestHeader {
 
-        String TRACE_HEADER = "x-traceId-header";
+        String TRACE = "x-trace-id";
 
-        String TOKEN_HEADER = "x-token-header";
+        String IDEMPOTENT_TOKEN = "x-idempotent-token";
 
     }
 }

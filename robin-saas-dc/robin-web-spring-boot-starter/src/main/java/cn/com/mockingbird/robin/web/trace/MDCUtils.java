@@ -18,11 +18,6 @@ public class MDCUtils {
     public static final String TRACE_KEY = "traceId";
 
     /**
-     * 追踪链路 ID 的信息头名称
-     */
-    public static final String TRACE_ID_HEADER_NAME = "x-traceId-header";
-
-    /**
      * filter 的优先级，值越低越优先
      */
     public static final int FILTER_ORDER = -1;

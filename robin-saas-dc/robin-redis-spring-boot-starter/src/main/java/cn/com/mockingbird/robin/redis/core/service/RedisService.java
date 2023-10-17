@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2023/10/14 3:40
  **/
 @SuppressWarnings("unused")
+@Service
 public record RedisService(RedisTemplate<String, Object> redisTemplate) {
 
     /**

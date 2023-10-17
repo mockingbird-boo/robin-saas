@@ -1,10 +1,12 @@
 package cn.com.mockingbird.robin.common.util;
 
 import cn.com.mockingbird.robin.common.constant.Standard;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 字符串工具类
@@ -18,6 +20,8 @@ import java.util.List;
 public final class StringUtils {
 
     public static final String COMMA = ",";
+
+    public static final String ALL_CHAR_NUM = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     /**
      * 首字符大写
@@ -65,5 +69,21 @@ public final class StringUtils {
      */
     public static String millis2String(long millis) {
         return DateFormatUtils.format(millis, Standard.DateTimePattern.DATETIME);
+    }
+
+    /**
+     * 生成指定长度的随机字符串
+     * @param length 长度，要求 >= 1
+     * @return 指定长度的随机字符串
+     * @see RandomStringUtils#randomAlphabetic(int)
+     */
+    @Deprecated
+    public static String getStringNumRandom(int length) {
+        Random random = new Random();
+        StringBuilder saltString = new StringBuilder(length);
+        for (int i = 1; i <= length; ++i) {
+            saltString.append(ALL_CHAR_NUM.charAt(random.nextInt(ALL_CHAR_NUM.length())));
+        }
+        return saltString.toString();
     }
 }

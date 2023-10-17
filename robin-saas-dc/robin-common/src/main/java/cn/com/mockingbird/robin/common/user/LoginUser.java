@@ -5,8 +5,6 @@ import lombok.Data;
 /**
  * 登录用户
  *
- * TODO 字段还需增加
- *
  * @author zhaopeng
  * @date 2023/10/5 21:35
  **/

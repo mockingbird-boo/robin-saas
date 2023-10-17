@@ -1,5 +1,6 @@
 package cn.com.mockingbird.robin.web.filter;
 
+import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.common.util.BranchUtils;
 import cn.com.mockingbird.robin.web.trace.MDCUtils;
 import jakarta.servlet.FilterChain;
@@ -23,7 +24,7 @@ public class RequestTraceFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            String traceId = request.getHeader(MDCUtils.TRACE_ID_HEADER_NAME);
+            String traceId = request.getHeader(Standard.RequestHeader.TRACE);
             BranchUtils.isTureOrFalse(StringUtils.isBlank(traceId)).trueOrFalseHandle(MDCUtils::trace, () -> MDCUtils.trace(traceId));
             filterChain.doFilter(request, response);
         } finally {

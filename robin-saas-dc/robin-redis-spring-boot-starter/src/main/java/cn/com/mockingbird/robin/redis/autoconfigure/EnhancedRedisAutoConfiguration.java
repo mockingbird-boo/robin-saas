@@ -1,6 +1,7 @@
 package cn.com.mockingbird.robin.redis.autoconfigure;
 
 import cn.com.mockingbird.robin.common.constant.Standard;
+import cn.com.mockingbird.robin.redis.core.service.RedisService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -69,6 +71,12 @@ public class EnhancedRedisAutoConfiguration {
 
         redisTemplate.setConnectionFactory(connectionFactory);
         return redisTemplate;
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisService redisService(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisService(redisTemplate);
     }
 
 

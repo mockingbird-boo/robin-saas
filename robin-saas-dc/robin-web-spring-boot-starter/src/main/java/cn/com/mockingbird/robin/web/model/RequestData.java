@@ -1,7 +1,6 @@
 package cn.com.mockingbird.robin.web.model;
 
 import lombok.Data;
-import org.springframework.http.HttpMethod;
 
 /**
  * 请求数据模型
