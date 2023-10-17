@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.enums;
+package cn.com.mockingbird.robin.web.mvc;
 
 import lombok.Getter;
 

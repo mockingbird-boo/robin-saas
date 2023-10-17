@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.trace;
+package cn.com.mockingbird.robin.web.traceMethod;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TraceAspect {
 
     @SuppressWarnings("all")
-    @Pointcut("@annotation(cn.com.mockingbird.robin.web.trace.Trace)")
+    @Pointcut("@annotation(cn.com.mockingbird.robin.web.traceMethod.Trace)")
     public void tracePointCut() {}
 
     /**

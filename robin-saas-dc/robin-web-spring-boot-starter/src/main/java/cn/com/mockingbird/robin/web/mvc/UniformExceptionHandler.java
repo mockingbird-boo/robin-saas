@@ -1,8 +1,6 @@
-package cn.com.mockingbird.robin.web.exception;
+package cn.com.mockingbird.robin.web.mvc;
 
 import cn.com.mockingbird.robin.common.exception.BaseRuntimeException;
-import cn.com.mockingbird.robin.web.enums.ResponseCode;
-import cn.com.mockingbird.robin.web.model.ResponseData;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
