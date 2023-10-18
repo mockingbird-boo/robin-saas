@@ -27,6 +27,7 @@
         <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
         <HikariCP.version>5.0.1</HikariCP.version>
         <transmittable-thread-local.version>2.14.3</transmittable-thread-local.version>
+        <redisson-spring-boot-starter.version>3.20.0</redisson-spring-boot-starter.version>
     </properties>
 
     <dependencyManagement>
@@ -121,6 +122,11 @@
                 <groupId>cn.com.mockingbird</groupId>
                 <artifactId>robin-redis-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis 服务工具
+ * <p>
+ * 底层主要用到了 lettuce 组件
  *
  * @author zhaopeng
  * @date 2023/10/14 3:40
