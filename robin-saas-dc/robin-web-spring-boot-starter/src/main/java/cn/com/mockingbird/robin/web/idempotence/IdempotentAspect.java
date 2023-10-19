@@ -3,6 +3,8 @@ package cn.com.mockingbird.robin.web.idempotence;
 import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.common.user.UserHolder;
 import cn.com.mockingbird.robin.common.util.BranchUtils;
+import cn.com.mockingbird.robin.common.util.RequestUtils;
+import cn.com.mockingbird.robin.redis.core.service.RedisLockService;
 import cn.com.mockingbird.robin.redis.core.service.RedisService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;
@@ -12,10 +14,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.redisson.api.RLock;
 
-import java.util.Objects;
+import java.lang.reflect.Method;
 
 /**
  * 幂等切面
@@ -29,8 +31,11 @@ public class IdempotentAspect {
 
     private final RedisService redisService;
 
-    public IdempotentAspect(RedisService redisService) {
+    private final RedisLockService redisLockService;
+
+    public IdempotentAspect(RedisService redisService, RedisLockService redisLockService) {
         this.redisService = redisService;
+        this.redisLockService = redisLockService;
     }
 
 
@@ -47,7 +52,7 @@ public class IdempotentAspect {
     @Around(value = "idempotentPointCut(idempotent)", argNames = "joinPoint,idempotent")
     public Object around(ProceedingJoinPoint joinPoint, Idempotent idempotent) throws Throwable {
         // Http 请求
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        HttpServletRequest request = RequestUtils.getHttpRequest();
         // 用户名
         String username = UserHolder.getCurrentUser().getUsername();
         // 幂等策略
@@ -62,7 +67,20 @@ public class IdempotentAspect {
             // 有幂等令牌就删，成功删掉即非重复提交
             String key = Key.generateTokenKey(username, token);
             return redisService.delete(key) == 1;
-        }, () -> false);
+        }, () -> {
+            // 客户端 ip
+            String clientIp = RequestUtils.getClientIp(request);
+            // 方法
+            Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+            // 类
+            String className = method.getDeclaringClass().getName();
+            // 间隔时长，对应锁的时长
+            long interval = idempotent.interval();
+            // 获取锁实例
+            RLock lock = redisLockService.getLock(Key.generateLockKey(username, clientIp, className, method.getName()));
+            // 加锁，并指定等待0秒和锁释放时间，成功加锁即非重复提交
+            return redisLockService.tryLock(lock, 0, interval);
+        });
         if (isPrettyRequest) {
             return joinPoint.proceed();
         }
