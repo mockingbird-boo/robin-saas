@@ -17,13 +17,13 @@ import java.lang.annotation.*;
 public @interface Idempotent {
 
     /**
-     * 实现策略：方法参数和令牌
+     * 实现策略：锁和令牌
      */
     enum Strategy {
         /**
-         * 方法参数
+         * 锁，会将“用户名 + 客户端IP + 类名 + 方法名”作为锁的 key
          */
-        PARAM,
+        LOCK,
         /**
          * 令牌
          */
@@ -31,13 +31,13 @@ public @interface Idempotent {
     }
 
     /**
-     * 策略，默认为方法参数策略
+     * 策略，默认策略为锁策略
      * @return 策略类型
      */
-    Strategy strategy() default Strategy.PARAM;
+    Strategy strategy() default Strategy.LOCK;
 
     /**
-     * 间隔，采用参数策略下有意义
+     * 间隔，锁策略下有意义，不应该超过1天
      * @return 间隔时长，单位：秒
      */
     long interval() default 5;

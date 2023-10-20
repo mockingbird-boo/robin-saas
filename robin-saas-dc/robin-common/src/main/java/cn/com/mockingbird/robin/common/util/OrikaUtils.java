@@ -38,7 +38,7 @@ public enum OrikaUtils {
      * @param <T> 目标泛型
      * @return 目标类实例
      */
-    public  <S, T> T convert(S sourceInstance, Class<T> targetClass, Map<String, String> fieldMap) {
+    public <S, T> T convert(S sourceInstance, Class<T> targetClass, Map<String, String> fieldMap) {
         if (sourceInstance == null) {
             return null;
         }
@@ -53,7 +53,7 @@ public enum OrikaUtils {
      * @param <S> 源泛型
      * @param <T> 目标泛型
      */
-    public  <S, T> T convert(S sourceInstance, Class<T> targetClass) {
+    public <S, T> T convert(S sourceInstance, Class<T> targetClass) {
         return convert(sourceInstance, targetClass, null);
     }
 
@@ -84,7 +84,7 @@ public enum OrikaUtils {
      * @param <S> 源泛型
      * @param <T> 目标泛型
      */
-    @SuppressWarnings("all")
+    @SuppressWarnings("unused")
     public <S, T> List<T> convertList(List<S> sourceInstances, Class<T> targetClass) {
         return convertList(sourceInstances, targetClass, null);
     }

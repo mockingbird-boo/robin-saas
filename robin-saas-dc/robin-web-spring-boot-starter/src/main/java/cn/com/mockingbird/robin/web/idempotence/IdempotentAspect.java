@@ -76,6 +76,10 @@ public class IdempotentAspect {
             String className = method.getDeclaringClass().getName();
             // 间隔时长，对应锁的时长
             long interval = idempotent.interval();
+            if (interval > 60 * 60 * 24) {
+                log.warn("幂等设置的间隔时长不允许超过1天，超过1天将重置为默认间隔时长5秒");
+                interval = 5;
+            }
             // 获取锁实例
             RLock lock = redisLockService.getLock(Key.generateLockKey(username, clientIp, className, method.getName()));
             // 加锁，并指定等待0秒和锁释放时间，成功加锁即非重复提交

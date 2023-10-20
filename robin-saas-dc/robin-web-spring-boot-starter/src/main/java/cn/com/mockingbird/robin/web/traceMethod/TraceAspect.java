@@ -66,8 +66,8 @@ public class TraceAspect {
                 "方法追踪 ==> [{}]，耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]" :
                 "方法追踪 ==> [{}]，[{}] 耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]";
 
-        String start = cn.com.mockingbird.robin.common.util.StringUtils.millis2String(trackingData.getStartMillis());
-        String end = cn.com.mockingbird.robin.common.util.StringUtils.millis2String(trackingData.getEndMillis());
+        String start = cn.com.mockingbird.robin.common.util.StringUtils.millisToString(trackingData.getStartMillis());
+        String end = cn.com.mockingbird.robin.common.util.StringUtils.millisToString(trackingData.getEndMillis());
         List<String> params = new ArrayList<>();
         params.add(path);
         if (StringUtils.isNotBlank(description)) {

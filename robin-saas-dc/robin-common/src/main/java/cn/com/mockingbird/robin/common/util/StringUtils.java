@@ -67,7 +67,7 @@ public final class StringUtils {
      * @param millis 毫秒时间戳
      * @return 日期时间字符串
      */
-    public static String millis2String(long millis) {
+    public static String millisToString(long millis) {
         return DateFormatUtils.format(millis, Standard.DateTimePattern.DATETIME);
     }
 
@@ -85,5 +85,22 @@ public final class StringUtils {
             saltString.append(ALL_CHAR_NUM.charAt(random.nextInt(ALL_CHAR_NUM.length())));
         }
         return saltString.toString();
+    }
+
+    /**
+     * 二进制转十六进制
+     * @param bytes 二进制数据
+     * @return 十六进制数据
+     */
+    public static String byteToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(b & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
     }
 }

@@ -19,10 +19,12 @@ public interface Standard {
     }
 
     /**
-     * 字符串常量标准
+     * 字符串符号标准
      */
     interface Str {
         String EMPTY = "";
+
+        String COMMA = ",";
     }
 
     /**
@@ -33,6 +35,19 @@ public interface Standard {
         String TRACE = "x-trace-id";
 
         String IDEMPOTENT_TOKEN = "x-idempotent-token";
+
+    }
+
+    /**
+     * 数据加密算法
+     */
+    interface Algorithm {
+
+        String MD5 = "MD5";
+
+        String SHA1 = "SHA-1";
+
+        String SHA256 = "SHA-256";
 
     }
 }
