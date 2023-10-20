@@ -23,6 +23,7 @@
         <module>robin-web-spring-boot-starter</module>
         <module>robin-cache-spring-boot-starter</module>
         <module>robin-redis-spring-boot-starter</module>
+        <module>robin-integration-spring-boot-starter</module>
     </modules>
 
     <dependencyManagement>
