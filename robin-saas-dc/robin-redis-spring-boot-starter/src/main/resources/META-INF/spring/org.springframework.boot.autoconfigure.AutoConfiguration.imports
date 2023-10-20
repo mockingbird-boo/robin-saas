@@ -1,1 +1,2 @@
 cn.com.mockingbird.robin.redis.autoconfigure.EnhancedRedisAutoConfiguration
+cn.com.mockingbird.robin.redis.autoconfigure.RedisSerializerAutoConfiguration
