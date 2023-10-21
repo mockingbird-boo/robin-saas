@@ -1,10 +1,9 @@
 package cn.com.mockingbird.robin.mybatis.base;
 
-import cn.com.mockingbird.robin.mybatis.query.Condition;
 import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,11 +13,10 @@ import java.time.LocalDateTime;
  * @author zhaopeng
  * @date 2023/10/5 20:50
  **/
-@Data
+@Getter
+@Setter
+@SuppressWarnings("serial")
 public abstract class BaseEntity implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = -1L;
 
     /**
      * 自增主键
@@ -28,21 +26,25 @@ public abstract class BaseEntity implements Serializable {
     /**
      * 创建时间
      */
+    @Getter
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdTime;
     /**
      * 创建人
      */
+    @Getter
     @TableField(fill = FieldFill.INSERT)
     private String createdUser;
     /**
      * 更新时间
      */
+    @Getter
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedTime;
     /**
      * 更新人
      */
+    @Getter
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedUser;
     /**
@@ -50,4 +52,5 @@ public abstract class BaseEntity implements Serializable {
      */
     @TableLogic
     private Boolean isDeleted;
+
 }

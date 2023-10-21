@@ -115,6 +115,16 @@
                 <version>${transmittable-thread-local.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat-embed-core.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>cn.com.mockingbird</groupId>
                 <artifactId>robin-banner-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
@@ -125,16 +135,15 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson-spring-boot-starter.version}</version>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-web-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat-embed-core.version}</version>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-mybatis-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
