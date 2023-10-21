@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: robin-starter-quartz
@@ -40,6 +39,4 @@ server:
   port: 8081
 logging:
   level:
-    root: info
     cn.com.mockingbird.robin.quartz: debug
-
