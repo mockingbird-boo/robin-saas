@@ -1,6 +1,7 @@
 package cn.com.mockingbird.robin.web.config;
 
 import cn.com.mockingbird.robin.common.constant.Standard;
+import cn.com.mockingbird.robin.web.context.SpringApplicationContext;
 import cn.com.mockingbird.robin.web.mvc.InitBinderAdvice;
 import cn.com.mockingbird.robin.web.mvc.ResponseDataAdvice;
 import cn.com.mockingbird.robin.web.mvc.UniformExceptionHandler;
@@ -65,6 +66,11 @@ public class WebAutoConfiguration {
         filterRegistrationBean.setOrder(Integer.MIN_VALUE + 100);
         filterRegistrationBean.addUrlPatterns("/*");
         return filterRegistrationBean;
+    }
+
+    @Bean
+    public SpringApplicationContext springApplicationContext() {
+        return new SpringApplicationContext();
     }
 
 }

@@ -25,7 +25,13 @@ import java.util.concurrent.TimeUnit;
  **/
 @SuppressWarnings("unused")
 @Service
-public record RedisService(RedisTemplate<String, Object> redisTemplate) {
+public class RedisService {
+
+    private RedisTemplate<String, Object> redisTemplate;
+
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 返回 Redis 的连接工厂
@@ -41,7 +47,6 @@ public record RedisService(RedisTemplate<String, Object> redisTemplate) {
      *
      * @return RedisTemplate 实例
      */
-    @Override
     public RedisTemplate<String, Object> redisTemplate() {
         return redisTemplate;
     }
@@ -150,7 +155,7 @@ public record RedisService(RedisTemplate<String, Object> redisTemplate) {
         byte[] serializedKey = serializeKey(key);
         byte[] serializedValue = serializeValue(value, valueSerializer);
 
-        redisTemplate.execute(connection -> new RedisCallback<>() {
+        redisTemplate.execute(connection -> new RedisCallback<Object>() {
             @Override
             public Object doInRedis(@NonNull RedisConnection connection) throws DataAccessException {
                 execSetEx(connection);

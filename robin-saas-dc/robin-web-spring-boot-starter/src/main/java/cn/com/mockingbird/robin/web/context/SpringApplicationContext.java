@@ -1,9 +1,9 @@
-package cn.com.mockingbird.robin.common.spring;
+package cn.com.mockingbird.robin.web.context;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
+import org.springframework.lang.NonNull;
 
 import java.util.Arrays;
 
@@ -13,14 +13,13 @@ import java.util.Arrays;
  * @author zhaopeng
  * @date 2023/10/2 2:05
  **/
-@Component
+@SuppressWarnings("unused")
 public class SpringApplicationContext implements ApplicationContextAware {
 
     public static ApplicationContext applicationContext;
 
-    @SuppressWarnings("all")
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         SpringApplicationContext.applicationContext = applicationContext;
     }
 
@@ -77,7 +76,7 @@ public class SpringApplicationContext implements ApplicationContextAware {
      * @param name bean's name
      * @return bean's class
      */
-    public static Class<? extends Object> getClass(String name) {
+    public static Class<?> getClass(String name) {
         return applicationContext.getType(name);
     }
 

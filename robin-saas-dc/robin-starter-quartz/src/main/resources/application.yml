@@ -2,6 +2,8 @@
 spring:
   application:
     name: robin-starter-quartz
+  profiles:
+    active: dev
   datasource:
     url: 'jdbc:mysql://192.168.10.101:3306/robin_quartz_jobs?useUnicode=true&useSSL=false'
     username: developer
@@ -36,3 +38,8 @@ spring:
       initialize-schema: never
 server:
   port: 8081
+logging:
+  level:
+    root: info
+    cn.com.mockingbird.robin.quartz: debug
+

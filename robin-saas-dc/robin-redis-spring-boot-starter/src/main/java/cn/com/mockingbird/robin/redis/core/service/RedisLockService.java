@@ -3,7 +3,6 @@ package cn.com.mockingbird.robin.redis.core.service;
 import org.redisson.api.RLock;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -18,7 +17,6 @@ import java.util.function.Supplier;
  * @date 2023/10/19 1:28
  **/
 @SuppressWarnings("unused")
-@Service
 public class RedisLockService {
 
     private final RedissonClient redissonClient;

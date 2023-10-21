@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.common.util;
+package cn.com.mockingbird.robin.common.util.request;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestAttributes;

@@ -20,8 +20,8 @@ public class EnhancedRedisAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(RedisTemplate.class)
-    public RedisService redisService(RedisTemplate<String, Object> redisTemplate) {
-        return new RedisService(redisTemplate);
+    public RedisService redisService() {
+        return new RedisService();
     }
 
     @Bean

@@ -1,11 +1,11 @@
 package cn.com.mockingbird.robin.quartz.schedule;
 
-import cn.com.mockingbird.robin.common.spring.SpringApplicationContext;
 import cn.com.mockingbird.robin.common.util.OrikaUtils;
 import cn.com.mockingbird.robin.quartz.common.ResultEnum;
 import cn.com.mockingbird.robin.quartz.entity.Job;
 import cn.com.mockingbird.robin.quartz.entity.Log;
 import cn.com.mockingbird.robin.quartz.service.LogService;
+import cn.com.mockingbird.robin.web.context.SpringApplicationContext;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StopWatch;

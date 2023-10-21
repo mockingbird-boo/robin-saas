@@ -3,7 +3,7 @@ package cn.com.mockingbird.robin.web.idempotence;
 import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.common.user.UserHolder;
 import cn.com.mockingbird.robin.common.util.BranchUtils;
-import cn.com.mockingbird.robin.common.util.RequestUtils;
+import cn.com.mockingbird.robin.common.util.request.RequestUtils;
 import cn.com.mockingbird.robin.redis.core.service.RedisLockService;
 import cn.com.mockingbird.robin.redis.core.service.RedisService;
 import jakarta.servlet.http.HttpServletRequest;
