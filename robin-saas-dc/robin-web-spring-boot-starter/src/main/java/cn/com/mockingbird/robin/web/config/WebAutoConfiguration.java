@@ -5,6 +5,7 @@ import cn.com.mockingbird.robin.web.context.SpringApplicationContext;
 import cn.com.mockingbird.robin.web.mvc.InitBinderAdvice;
 import cn.com.mockingbird.robin.web.mvc.ResponseDataAdvice;
 import cn.com.mockingbird.robin.web.mvc.UniformExceptionHandler;
+import cn.com.mockingbird.robin.web.trace.FeignRequestInterceptor;
 import cn.com.mockingbird.robin.web.trace.RequestTraceFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -71,6 +72,11 @@ public class WebAutoConfiguration {
     @Bean
     public SpringApplicationContext springApplicationContext() {
         return new SpringApplicationContext();
+    }
+
+    @Bean
+    public FeignRequestInterceptor feignRequestInterceptor() {
+        return new FeignRequestInterceptor();
     }
 
 }

@@ -36,6 +36,11 @@ public interface Standard {
 
         String IDEMPOTENT_TOKEN = "x-idempotent-token";
 
+        /**
+         * 内容大小，单位：字节
+         */
+        String CONTENT_LENGTH = "Content-Length";
+
     }
 
     /**
