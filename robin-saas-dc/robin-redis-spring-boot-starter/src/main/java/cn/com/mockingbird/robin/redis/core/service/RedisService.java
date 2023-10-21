@@ -4,10 +4,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisClusterNode;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.TimeoutUtils;
+import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.lang.NonNull;
@@ -215,6 +212,35 @@ public record RedisService(RedisTemplate<String, Object> redisTemplate) {
         for (int i = 0; i < keys.length; i++) {
             redisTemplate.opsForValue().set(keys[i], values[i]);
         }
+    }
+
+    /**
+     * 将指定 Key 下存储为字符串值的整数值递增 1
+     * @param key K - 要求非空
+     * @return Value
+     */
+    public Long increment(final String key) {
+        return redisTemplate.opsForValue().increment(key);
+    }
+
+    /**
+     * 按增量递增指定 Key 下存储为字符串值的整数值
+     * @param key K - 要求非空
+     * @param delta 增量
+     * @return Value
+     */
+    public Long increment(final String key, final long delta) {
+        return redisTemplate.opsForValue().increment(key, delta);
+    }
+
+    /**
+     * 按增量递增指定 Key 下存储为字符串值的浮点数值
+     * @param key K - 要求非空
+     * @param delta 增量
+     * @return Value
+     */
+    public Double increment(final String key, final double delta) {
+        return redisTemplate.opsForValue().increment(key, delta);
     }
 
     /**
@@ -440,6 +466,154 @@ public record RedisService(RedisTemplate<String, Object> redisTemplate) {
      */
     public long hIncr(final String key, final String hashKey, long value) {
         return redisTemplate.opsForHash().increment(key, hashKey, value);
+    }
+
+    /**
+     * 返回 ListOperations 实例
+     * @return ListOperations 实例
+     */
+    public ListOperations<String, Object> opsForList() {
+        return redisTemplate.opsForList();
+    }
+
+    /**
+     * 从左边添加一个 V
+     * @param key K - 要求非空
+     * @param value V
+     * @return 添加元素后列表的长度
+     */
+    public Long lPush(final String key, final Object value) {
+        return redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    /**
+     * 从左边添加一个或多个 V
+     * @param key K - 要求非空
+     * @param values 一个或多个 V
+     * @return 添加元素后列表的长度
+     */
+    public Long lPushAll(final String key, final Object... values) {
+        return redisTemplate.opsForList().leftPushAll(key, values);
+    }
+
+    /**
+     * 从左边批量添加 V
+     *
+     * @param key K - 要求非空
+     * @param values V 集合 - 要求非空
+     * @return 添加元素后列表的长度
+     */
+    public Long lPushAll(final String key, final Collection<Object> values) {
+        return redisTemplate.opsForList().leftPushAll(key, values);
+    }
+
+    /**
+     * 删除并返回存储在指定 Key 的列表中的第一个元素
+     * @param key K - 要求非空
+     * @return 存储在指定 Key 的列表中的第一个元素
+     */
+    public Object lPop(final String key) {
+        return redisTemplate.opsForList().leftPop(key);
+    }
+
+    /**
+     * 从右边添加一个 V
+     * @param key K - 要求非空
+     * @param value V
+     * @return 添加元素后列表的长度
+     */
+    public Long rPush(final String key, final Object value) {
+        return redisTemplate.opsForList().rightPush(key, value);
+    }
+
+    /**
+     * 从右边添加一个或多个 V
+     * @param key K - 要求非空
+     * @param values 一个或多个 V
+     * @return 添加元素后列表的长度
+     */
+    public Long rPushAll(final String key, final Object... values) {
+        return redisTemplate.opsForList().rightPushAll(key, values);
+    }
+
+    /**
+     * 从右边批量添加 V
+     *
+     * @param key K - 要求非空
+     * @param values V 集合 - 要求非空
+     * @return 添加元素后列表的长度
+     */
+    public Long rPushAll(final String key, final Collection<Object> values) {
+        return redisTemplate.opsForList().rightPushAll(key, values);
+    }
+
+    /**
+     * 删除并返回存储在指定 Key 的列表中的末尾元素
+     * @param key K - 要求非空
+     * @return 存储在指定 Key 的列表中的末尾元素
+     */
+    public Object rPop(final String key) {
+        return redisTemplate.opsForList().rightPop(key);
+    }
+
+    /**
+     * 从存储在 Key 的列表中删除 V 的第一个计数匹配项
+     *
+     * @param key K - 要求非空
+     * @param count 大于0 - 从左到右删除 V 等于指定 V 的 count 个元素；
+     *              小于0 - 从右到左删除 V 等于指定 V 的 count 个元素；
+     *              等于0 - 删除所有 V 等于指定 V 的元素
+     * @param value V
+     * @return 删除元素的数量
+     */
+    public Long remove(final String key, final long count, final Object value) {
+        return redisTemplate.opsForList().remove(key, count, value);
+    }
+
+    /**
+     * 在列表索引处设置值列表元素
+     *
+     * @param key K - 要求非空
+     * @param index 索引
+     * @param value V
+     */
+    public void lSet(final String key, final long index, final Object value) {
+        redisTemplate.opsForList().set(key, index, value);
+    }
+
+    /**
+     * 返回 Key 对应列表的大小
+     * @param key K - 要求非空
+     * @return Key 对应列表的大小
+     */
+    public Long size(final String key) {
+        return redisTemplate.opsForList().size(key);
+    }
+
+    /**
+     * 返回指定范围内的元素列表
+     * @param key K - 要求非空
+     * @param start 开始索引，如果大于列表末尾，则返回空列表
+     * @param end 结束索引（包含）
+     * @return 指定范围内的元素列表
+     */
+    public List<Object> lRange(final String key, final int start, final int end) {
+        return redisTemplate.opsForList().range(key, start, end);
+    }
+
+    /**
+     * 返回指定范围内的元素列表
+     * @param key K - 要求非空
+     * @param start 开始索引，如果大于列表末尾，则返回空列表
+     * @param end 结束索引（包含）
+     * @param valueSerializer 值序列化器
+     * @return 指定范围内的元素列表
+     */
+    public List<Object> lRange(final String key, final int start, final int end, RedisSerializer<Object> valueSerializer) {
+        byte[] rawKey = serializeKey(key);
+        return redisTemplate.execute(connection ->
+                deserializeValues(connection.listCommands().lRange(rawKey, start, end), valueSerializer),
+                true);
     }
 
     /**
