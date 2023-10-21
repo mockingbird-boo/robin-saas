@@ -586,7 +586,7 @@ public record RedisService(RedisTemplate<String, Object> redisTemplate) {
      * @param key K - 要求非空
      * @return Key 对应列表的大小
      */
-    public Long size(final String key) {
+    public Long lSize(final String key) {
         return redisTemplate.opsForList().size(key);
     }
 
@@ -614,6 +614,92 @@ public record RedisService(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.execute(connection ->
                 deserializeValues(connection.listCommands().lRange(rawKey, start, end), valueSerializer),
                 true);
+    }
+
+    /**
+     * 返回 SetOperations 实例
+     * @return SetOperations 实例
+     */
+    public SetOperations<String, Object> opsForSet() {
+        return redisTemplate.opsForSet();
+    }
+
+    /**
+     * 给 Set 集合添加 V
+     * @param key K - 要求非空
+     * @param value V
+     */
+    public void sAdd(final String key, final Object value) {
+        redisTemplate.opsForSet().add(key, value);
+    }
+
+    /**
+     * 给 Set 集合添加一个或多个 V
+     * @param key K - 要求非空
+     * @param values 一个或多个 V
+     * @return 添加到集合中的元素数，不包括集合中已存在的所有元素
+     */
+    public Long sAdd(final String key, final Object... values) {
+        return redisTemplate.opsForSet().add(key, values);
+    }
+
+    /**
+     * 从 Set 集合中删除值为指定 V 的元素
+     * @param key K - 要求非空
+     * @param value 指定 V
+     * @return 已删除元素的数量
+     */
+    public Long remove(final String key, final Object value) {
+        return redisTemplate.opsForSet().remove(key, value);
+    }
+
+    /**
+     * 判断 Set 集合中是否存在指定元素
+     * @param key K - 要求非空
+     * @param value V
+     * @return true - 存在
+     */
+    public Boolean isMember(final String key, final Object value) {
+        return redisTemplate.opsForSet().isMember(key, value);
+    }
+
+    /**
+     * 获取指定 set 的所有元素
+     * @param key K - 要求非空
+     * @return 指定 set 的所有元素
+     */
+    public Set<Object> members(final String key) {
+        return redisTemplate.opsForSet().members(key);
+    }
+
+    /**
+     * 返回两个 Set 集合的并集
+     * @param key 一个 Set 集合的 K
+     * @param otherKey 另一个 Set 集合的 K
+     * @return 两个 Set 集合的并集
+     */
+    public Set<Object> union(String key, String otherKey) {
+        return redisTemplate.opsForSet().union(key, otherKey);
+    }
+
+    /**
+     * 返回两个 Set 集合的交集
+     * @param key 一个 Set 集合的 K
+     * @param otherKey 另一个 Set 集合的 K
+     * @return 两个 Set 集合的交集
+     */
+    public Set<Object> intersect(String key, String otherKey) {
+        return redisTemplate.opsForSet().intersect(key, otherKey);
+    }
+
+    /**
+     * 返回两个 Set 集合的差集
+     * @param key 一个 Set 集合的 K
+     * @param otherKey 另一个 Set 集合的 K
+     * @return key 对应 Set 集合与 otherKey 对应 Set 集合的差集
+     */
+    public Set<Object> difference(String key, String otherKey) {
+        return redisTemplate.opsForSet().difference(key, otherKey);
     }
 
     /**
