@@ -1,7 +1,6 @@
 package cn.com.mockingbird.robin.redis.autoconfigure;
 
-import cn.com.mockingbird.robin.redis.core.service.RedisLockService;
-import cn.com.mockingbird.robin.redis.core.service.RedisService;
+import cn.com.mockingbird.robin.redis.core.service.*;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.starter.RedissonAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -16,12 +15,48 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @date 2023/10/13 22:28
  **/
 @AutoConfiguration(after = RedissonAutoConfiguration.class)
+@ConditionalOnBean(RedisTemplate.class)
 public class EnhancedRedisAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(RedisTemplate.class)
-    public RedisService redisService() {
-        return new RedisService();
+    public RedisService redisService(RedisTemplate<String, Object> redisTemplate) {
+        RedisService redisService = new RedisService();
+        redisService.setRedisTemplate(redisTemplate);
+        return redisService;
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisStringService redisStringService(RedisTemplate<String, Object> redisTemplate) {
+        RedisStringService redisStringService = new RedisStringService();
+        redisStringService.setRedisTemplate(redisTemplate);
+        return redisStringService;
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisHashService redisHashService(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisHashService(redisTemplate);
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisListService redisListService(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisListService(redisTemplate);
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisSetService redisSetService(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisSetService(redisTemplate);
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    @SuppressWarnings("all")
+    public RedisZSetService redisZSetService(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisZSetService(redisTemplate);
     }
 
     @Bean

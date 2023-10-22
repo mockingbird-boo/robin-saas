@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.web.idempotence;
 
 import cn.com.mockingbird.robin.common.user.UserHolder;
-import cn.com.mockingbird.robin.redis.core.service.RedisService;
+import cn.com.mockingbird.robin.redis.core.service.RedisStringService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/idempotent-token")
 public class IdempotentTokenController {
 
-    private final RedisService redisService;
+    private final RedisStringService redisStringService;
 
-    public IdempotentTokenController(RedisService redisService) {
-        this.redisService = redisService;
+    public IdempotentTokenController(RedisStringService redisStringService) {
+        this.redisStringService = redisStringService;
     }
 
     @GetMapping
@@ -32,7 +32,7 @@ public class IdempotentTokenController {
         String token = RandomStringUtils.randomAlphabetic(32);
         String key = Key.generateTokenKey(username, token);
         // 令牌有效时间 30 min
-        redisService.setExpire(key, Thread.currentThread().getName(), 30, TimeUnit.MINUTES);
+        redisStringService.set(key, Thread.currentThread().getName(), 30, TimeUnit.MINUTES);
         return token;
     }
 
