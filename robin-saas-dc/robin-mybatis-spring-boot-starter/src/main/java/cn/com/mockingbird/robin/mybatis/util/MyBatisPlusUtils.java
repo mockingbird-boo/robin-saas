@@ -1,9 +1,9 @@
 package cn.com.mockingbird.robin.mybatis.util;
 
+import cn.com.mockingbird.robin.common.model.PageParams;
 import cn.com.mockingbird.robin.common.util.StringCamelUtils;
 import cn.com.mockingbird.robin.mybatis.base.BaseEntity;
 import cn.com.mockingbird.robin.mybatis.query.QueryWrapperBuilder;
-import cn.com.mockingbird.robin.webmvc.model.PageParams;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

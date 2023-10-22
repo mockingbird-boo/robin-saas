@@ -1,9 +1,9 @@
 package cn.com.mockingbird.robin.mybatis.service;
 
+import cn.com.mockingbird.robin.common.model.PageData;
+import cn.com.mockingbird.robin.common.model.PageParams;
 import cn.com.mockingbird.robin.mybatis.base.BaseMapperX;
 import cn.com.mockingbird.robin.mybatis.query.QueryWrapperBuilder;
-import cn.com.mockingbird.robin.webmvc.model.PageData;
-import cn.com.mockingbird.robin.webmvc.model.PageParams;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,8 +1,8 @@
 package cn.com.mockingbird.robin.mybatis.base;
 
+import cn.com.mockingbird.robin.common.model.PageData;
+import cn.com.mockingbird.robin.common.model.PageParams;
 import cn.com.mockingbird.robin.mybatis.util.MyBatisPlusUtils;
-import cn.com.mockingbird.robin.webmvc.model.PageData;
-import cn.com.mockingbird.robin.webmvc.model.PageParams;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

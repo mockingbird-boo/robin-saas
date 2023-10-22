@@ -60,11 +60,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-spring-webmvc</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
