@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.common.util;
+package cn.com.mockingbird.robin.common.util.bean;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

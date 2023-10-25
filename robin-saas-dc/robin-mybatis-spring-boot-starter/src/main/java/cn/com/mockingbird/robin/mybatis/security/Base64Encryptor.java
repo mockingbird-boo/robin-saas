@@ -26,8 +26,8 @@ public final class Base64Encryptor implements DataEncryptor {
     @Override
     public String decrypt(String content) {
         try {
-            byte[] asBytes = Base64.getDecoder().decode(content);
-            return new String(asBytes, StandardCharsets.UTF_8);
+            byte[] bytes = Base64.getDecoder().decode(content);
+            return new String(bytes, StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("Failed to decrypt content!", e);
             throw new RuntimeException(e.getMessage());

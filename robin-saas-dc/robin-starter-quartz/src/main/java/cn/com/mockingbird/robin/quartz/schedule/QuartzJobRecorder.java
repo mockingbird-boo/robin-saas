@@ -1,6 +1,6 @@
 package cn.com.mockingbird.robin.quartz.schedule;
 
-import cn.com.mockingbird.robin.common.util.OrikaUtils;
+import cn.com.mockingbird.robin.common.util.bean.OrikaUtils;
 import cn.com.mockingbird.robin.quartz.common.ResultEnum;
 import cn.com.mockingbird.robin.quartz.entity.Job;
 import cn.com.mockingbird.robin.quartz.entity.Log;
