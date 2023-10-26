@@ -54,5 +54,11 @@ public interface Standard {
 
         String SHA256 = "SHA-256";
 
+        String RSA = "RSA";
+
+        String DSA = "DSA";
+
+        String MD5_WITH_RSA = "MD5withRSA";
+
     }
 }

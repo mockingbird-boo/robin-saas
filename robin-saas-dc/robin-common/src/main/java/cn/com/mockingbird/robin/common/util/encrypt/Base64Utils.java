@@ -25,16 +25,6 @@ public class Base64Utils {
     }
 
     /**
-     * 解码
-     *
-     * @param content 编码内容
-     * @return 解码结果
-     */
-    public String decode(byte[] content) {
-        return new String(Base64.getDecoder().decode(content));
-    }
-
-    /**
      * 编码
      * @param content 待编码内容
      * @return 编码结果
@@ -45,10 +35,37 @@ public class Base64Utils {
 
     /**
      * 解码
+     *
+     * @param content 编码内容
+     * @return 解码结果
+     */
+    public String decode(byte[] content) {
+        return new String(Base64.getDecoder().decode(content), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 解码
      * @param content 编码内容
      * @return 解码结果
      */
     public String decode(String content) {
-        return decode(content.getBytes(StandardCharsets.UTF_8));
+        return decode(content.getBytes(StandardCharsets.ISO_8859_1));
     }
+
+    /**
+     * 解码
+     * @param content 编码内容
+     * @return 字节数组
+     */
+    public byte[] decode2Bytes(String content) {
+        return Base64.getDecoder().decode(content);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(encode("我的纸飞机啊，飞呀飞呀，ABC"));
+        System.out.println(encode("我的纸飞机呀，飞呀飞呀，ABC".getBytes()));
+        System.out.println(decode("5oiR55qE57q46aOe5py65ZWK77yM6aOe5ZGA6aOe5ZGA77yMQUJD"));
+        System.out.println(decode("5oiR55qE57q46aOe5py65ZWK77yM6aOe5ZGA6aOe5ZGA77yMQUJD".getBytes()));
+    }
+
 }
