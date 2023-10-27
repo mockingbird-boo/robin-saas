@@ -14,7 +14,7 @@ import java.time.Instant;
 public class ResponseData<T> {
 
     /**
-     * 响应状态
+     * 响应状态码
      */
     private int status;
 

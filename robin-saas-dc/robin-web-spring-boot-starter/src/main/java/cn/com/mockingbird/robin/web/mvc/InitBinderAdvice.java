@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * MVC 参数绑定增强
  * <p>
- * 实现了GET请求及POST请求使用FormData传参时，
+ * 实现了GET请求及POST请求进行FormData传参时，
  * 日期时间字符串参数转Java日期时间类型的统一处理
  *
  * @author zhaopeng
