@@ -61,11 +61,4 @@ public class Base64Utils {
         return Base64.getDecoder().decode(content);
     }
 
-    public static void main(String[] args) {
-        System.out.println(encode("我的纸飞机啊，飞呀飞呀，ABC"));
-        System.out.println(encode("我的纸飞机呀，飞呀飞呀，ABC".getBytes()));
-        System.out.println(decode("5oiR55qE57q46aOe5py65ZWK77yM6aOe5ZGA6aOe5ZGA77yMQUJD"));
-        System.out.println(decode("5oiR55qE57q46aOe5py65ZWK77yM6aOe5ZGA6aOe5ZGA77yMQUJD".getBytes()));
-    }
-
 }

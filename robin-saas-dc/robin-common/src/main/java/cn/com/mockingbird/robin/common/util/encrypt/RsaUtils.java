@@ -187,22 +187,4 @@ public class RsaUtils {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        KeyPair keyPair = getKeyPair();
-        String privateKey = getPrivateKey(keyPair.getPrivate());
-        String publicKey = getPublicKey(keyPair.getPublic());
-        System.out.println("公钥：" + publicKey);
-        System.out.println("私钥：" + privateKey);
-
-        // 待加密数据
-        String data = "公元前21年，秦王YZ扫平天下";
-        String encryptedData = encrypt(data, getPublicKey(publicKey));
-        System.out.println("公钥加密后的数据：" + encryptedData);
-        String decryptedData = decrypt(encryptedData, getPrivateKey(privateKey));
-        System.out.println("私钥解密后的数据：" + decryptedData);
-        String sign = sign(decryptedData, getPrivateKey(privateKey));
-        System.out.println("私钥签名后的数据：" + sign);
-        System.out.println("公钥验签是否通过：" + isOriginalSign(decryptedData, getPublicKey(publicKey), sign));
-    }
-
 }
