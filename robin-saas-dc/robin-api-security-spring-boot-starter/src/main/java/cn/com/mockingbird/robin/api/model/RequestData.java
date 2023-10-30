@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.mvc;
+package cn.com.mockingbird.robin.api.model;
 
 import lombok.Data;
 

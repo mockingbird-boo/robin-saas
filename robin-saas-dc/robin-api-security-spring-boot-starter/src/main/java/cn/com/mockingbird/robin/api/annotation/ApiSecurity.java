@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.api.security;
+package cn.com.mockingbird.robin.api.annotation;
 
 import org.springframework.core.annotation.AliasFor;
 
