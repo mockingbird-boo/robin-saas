@@ -18,14 +18,14 @@ import java.lang.annotation.*;
 @Documented
 public @interface ApiSecurity {
 
-    @AliasFor("sign")
+    @AliasFor("signature")
     boolean value() default true;
 
     /**
      * 是否需要签名
      */
     @AliasFor("value")
-    boolean sign() default true;
+    boolean signature() default true;
 
 
     /**

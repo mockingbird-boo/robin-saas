@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.api.model;
+package cn.com.mockingbird.robin.api.wrapper;
 
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;
@@ -15,26 +15,28 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 /**
- * 请求体包装类
+ * HttpServletRequest 的包装类
  * <p>
- * 用于将封装请求流
+ * 用于将封装请求流，并重写了其中两个方法
+ * <p>
+ * 装饰者模式，通过继承 {@link HttpServletRequestWrapper}，可以完成对 {@link HttpServletRequest} 的替换
  *
  * @author zhaopeng
  * @date 2023/10/31 1:54
  **/
 @Getter
 @Setter
-public class RequestBodyWrapper extends HttpServletRequestWrapper {
+public class HttpServletRequestBodyWrapper extends HttpServletRequestWrapper {
 
     private String requestBody;
 
-    public RequestBodyWrapper(HttpServletRequest request) throws IOException {
+    public HttpServletRequestBodyWrapper(HttpServletRequest request) throws IOException {
         super(request);
         requestBody = new String(StreamUtils.copyToByteArray(request.getInputStream()), StandardCharsets.UTF_8);
     }
 
     @Override
-    public BufferedReader getReader() throws IOException {
+    public BufferedReader getReader() {
         return new BufferedReader(new InputStreamReader(getInputStream()));
     }
 
