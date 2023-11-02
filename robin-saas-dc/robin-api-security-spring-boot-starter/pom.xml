@@ -32,6 +32,10 @@
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,6 +1,7 @@
 package cn.com.mockingbird.robin.web.mvc;
 
 import cn.com.mockingbird.robin.common.exception.BaseRuntimeException;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
@@ -31,7 +32,8 @@ public class UniformExceptionHandler {
      * @return 使用 {@link ResponseData} 封装的异常响应实例
      */
     @ExceptionHandler(BaseRuntimeException.class)
-    public ResponseData<String> handleBaseRuntimeException(BaseRuntimeException e) {
+    public ResponseData<String> handleBaseRuntimeException(BaseRuntimeException e, HttpServletResponse response) {
+        response.setStatus(e.getCode());
         return ResponseData.failure(e.getCode(), e.getMessage());
     }
 

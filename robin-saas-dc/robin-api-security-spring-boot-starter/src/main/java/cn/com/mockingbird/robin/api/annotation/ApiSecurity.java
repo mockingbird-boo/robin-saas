@@ -27,7 +27,6 @@ public @interface ApiSecurity {
     @AliasFor("value")
     boolean signature() default true;
 
-
     /**
      * 请求参数是否需要解密
      */

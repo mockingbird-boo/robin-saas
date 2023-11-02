@@ -27,9 +27,19 @@ public enum ResponseCode {
     CONFLICT(409, "请求冲突"),
 
     /**
-     * 后台处理失败
+     * 请求方法不被允许
+     */
+    METHOD_NOT_ALLOWED(405, "请求方法不被允许"),
+
+    /**
+     * 服务器处理失败
      */
     FAIL(500, "fail"),
+
+    /**
+     * 服务器无法完成请求
+     */
+    NOT_IMPLEMENTED(501, "服务器无法完成请求"),
 
     ACCESS_DENIED(403, "权限不足")
     ;

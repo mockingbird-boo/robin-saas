@@ -1,6 +1,8 @@
 package cn.com.mockingbird.robin.common.util.request;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -82,6 +84,15 @@ public class RequestUtils {
         } else {
             return 0L;
         }
+    }
+
+    /**
+     * 判断 Http 请求是不是 POST/PUT/PATCH 请求
+     * @param request 请求实例
+     * @return true - 是
+     */
+    public static boolean isPostOrPutOrPatchRequest(HttpServletRequest request) {
+        return StringUtils.equalsAnyIgnoreCase(request.getMethod(), HttpMethod.POST.name(), HttpMethod.PUT.name(), HttpMethod.PATCH.name());
     }
 
     /**
