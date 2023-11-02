@@ -60,5 +60,12 @@ public interface Standard {
 
         String MD5_WITH_RSA = "MD5withRSA";
 
+        String AES = "AES";
+
+        /**
+         * 强随机数种子算法
+         */
+        String SHA1PRNG = "SHA1PRNG";
+
     }
 }
