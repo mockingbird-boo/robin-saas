@@ -341,4 +341,13 @@ public class RedisStringService {
         return redisTemplate.execute(connection -> SerialUtils.deserializeValue(connection.stringCommands().get(serializedKey), valueSerializer), true);
     }
 
+    /**
+     * 判断数据是否存在
+     * @param key 键 - 要求非空
+     * @return true - 存在
+     */
+    public Boolean hasKey(final String key) {
+        return redisTemplate.hasKey(key);
+    }
+
 }

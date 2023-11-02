@@ -17,12 +17,12 @@ public class ApiSecurityParam {
     private String nonce;
 
     /**
-     * RSA 加密后的 AES 密钥
+     * 客户端通过 RSA 公钥加密后的 AES 密钥
      */
     private String key;
 
     /**
-     * AES 加密后的 json 数据
+     * 客户端通过 AES 加密后的 json 数据
      */
     private String data;
 
