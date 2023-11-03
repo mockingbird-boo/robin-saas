@@ -17,9 +17,9 @@ public class ApiSecurityProperties {
      */
     private Boolean enable = true;
     /**
-     * 签名过期时间
+     * 签名过期时间，单位是秒，默认 30s
      */
-    private Integer signatureExpiredTime = 30;
+    private Long signatureExpiredTime = 30L;
     /**
      * RSA 私钥
      */

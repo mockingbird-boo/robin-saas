@@ -3,7 +3,7 @@ package cn.com.mockingbird.robin.api.aspect;
 import cn.com.mockingbird.robin.api.annotation.ApiSecurity;
 import cn.com.mockingbird.robin.api.autoconfigure.ApiSecurityProperties;
 import cn.com.mockingbird.robin.api.exception.ApiSecurityException;
-import cn.com.mockingbird.robin.api.model.ApiSecurityParam;
+import cn.com.mockingbird.robin.api.model.ApiRequestParam;
 import cn.com.mockingbird.robin.api.wrapper.HttpServletRequestBodyWrapper;
 import cn.com.mockingbird.robin.common.util.encrypt.AesUtils;
 import cn.com.mockingbird.robin.common.util.encrypt.DigestUtils;
@@ -49,7 +49,7 @@ public class ApiSecurityAspect {
             throw new ApiSecurityException(ResponseCode.METHOD_NOT_ALLOWED.getCode(), ResponseCode.METHOD_NOT_ALLOWED.getMessage());
         }
         Object[] args = joinPoint.getArgs(), decryptedArgs;
-        if (apiSecurity.decrypt()) {
+        if (apiSecurity.encrypted()) {
             // 安全接口不支持多个方法参数，只支持一个参数（封装类）
             if (args.length > 1) {
                 throw new ApiSecurityException("请联系技术人员检查安全接口");
@@ -62,20 +62,20 @@ public class ApiSecurityAspect {
                     requestWrapper = new HttpServletRequestBodyWrapper(request);
                 }
                 String requestBody = requestWrapper.getRequestBody();
-                ApiSecurityParam apiSecurityParam = JSONObject.parseObject(requestBody, ApiSecurityParam.class);
+                ApiRequestParam apiRequestParam = JSONObject.parseObject(requestBody, ApiRequestParam.class);
                 // RSA 私钥解密得到 AES 密钥
-                String aesKey = RsaUtils.decrypt(apiSecurityParam.getKey(), RsaUtils.getPrivateKey(apiSecurityProperties.getRsaPrivateKey()));
+                String aesKey = RsaUtils.decrypt(apiRequestParam.getKey(), RsaUtils.getPrivateKey(apiSecurityProperties.getRsaPrivateKey()));
                 // AES 密钥解密请求数据得到原始的请求参数
-                String decryptParamData = AesUtils.decrypt(apiSecurityParam.getData(), aesKey);
+                String decryptedParams = AesUtils.decrypt(apiRequestParam.getData(), aesKey);
                 // 接口参数类的类对象
                 Class<?> clazz = args[0].getClass();
-                Object param = JSONObject.parseObject(decryptParamData, clazz);
+                Object param = JSONObject.parseObject(decryptedParams, clazz);
                 decryptedArgs = new Object[]{param};
                 return joinPoint.proceed(decryptedArgs);
             }
         }
         // 验签
-        if (apiSecurity.sign()) {
+        if (apiSecurity.signature()) {
 
         }
         return null;
@@ -83,22 +83,26 @@ public class ApiSecurityAspect {
 
     /**
      * 加密加签验签，从 ApiSecurityParam 实例中获取签名、唯一标识、时间戳
-     * @param apiSecurityParam 请求参数
+     * @param apiRequestParam 请求参数
      * @param data 解密后的参数数据
      */
-    private void validSignature(ApiSecurityParam apiSecurityParam, String data) {
-        String signature = apiSecurityParam.getSignature();
-        String nonce = apiSecurityParam.getNonce();
-        String timestamp = apiSecurityParam.getTimestamp();
+    private void validSignature(ApiRequestParam apiRequestParam, String data) {
+        String signature = apiRequestParam.getSignature();
+        String nonce = apiRequestParam.getNonce();
+        String timestamp = apiRequestParam.getTimestamp();
 
         validSignature(signature);
         validTimestamp(timestamp);
         validNonce(nonce);
 
         if (DigestUtils.isOriginalContentByMd5(nonce + data + timestamp, signature)) {
-            // 删除 key，唯一删除成功的请求才不是重复请求
+            // 签名认证通过后，进行防重校验
+            boolean isPrettyRequest = redisStringService.setIfAbsent(nonce, timestamp, apiSecurityProperties.getSignatureExpiredTime());
+            if (!isPrettyRequest) {
+                throw new ApiSecurityException(ResponseCode.CONFLICT.getCode(), "重复请求");
+            }
         } else {
-            log.warn("请求可能被篡改");
+            log.warn("请求参数可能被篡改");
             throw new ApiSecurityException(ResponseCode.BAD_REQUEST.getCode(), "签名认证失败");
         }
 

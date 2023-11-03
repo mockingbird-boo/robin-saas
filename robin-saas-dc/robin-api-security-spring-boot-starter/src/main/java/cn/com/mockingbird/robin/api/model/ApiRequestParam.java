@@ -3,13 +3,18 @@ package cn.com.mockingbird.robin.api.model;
 import lombok.Data;
 
 /**
- * 有安全需求的 Api 的参数模型
+ * API 请求参数的数据模型
  *
  * @author zhaopeng
  * @date 2023/11/2 19:03
  **/
 @Data
-public class ApiSecurityParam {
+public class ApiRequestParam {
+
+    /**
+     * 请求中的加密数据
+     */
+    private String data;
 
     /**
      * 请求唯一标识
@@ -22,12 +27,7 @@ public class ApiSecurityParam {
     private String key;
 
     /**
-     * 客户端通过 AES 加密后的 json 数据
-     */
-    private String data;
-
-    /**
-     * 签名
+     * 数字签名
      */
     private String signature;
 

@@ -1,5 +1,9 @@
 package cn.com.mockingbird.robin.api.annotation;
 
+import cn.com.mockingbird.robin.api.enums.EncryptAlgorithm;
+import cn.com.mockingbird.robin.api.enums.DigestAlgorithm;
+import cn.com.mockingbird.robin.api.enums.IdempotentStrategy;
+import cn.com.mockingbird.robin.common.constant.Standard;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
@@ -7,7 +11,15 @@ import java.lang.annotation.*;
 /**
  * API 安全注解
  * <p>
- * 该注解用于标识 API 接口会经过加密、加签来加固接口的安全性。
+ * 该注解用于标识 API 接口是安全接口。
+ * <p>
+ * 使用该注解的 API 接口通过注解属性进行配置，可以支持以下：
+ * <ul>
+ * <li> 防窃取：传输数据加密；
+ * <li> 防伪装和篡改：数字签名；
+ * <li> 防重复调用：支持多种防重策略；
+ * <li> 数据脱敏：响应拦截。
+ * </ul>
  * 安全性包括：防篡改、防重放、响应数据脱敏。
  *
  * @author zhaopeng
@@ -18,23 +30,76 @@ import java.lang.annotation.*;
 @Documented
 public @interface ApiSecurity {
 
-    @AliasFor("signature")
+    @AliasFor("encrypted")
     boolean value() default true;
 
     /**
-     * 是否需要签名
+     * 请求数据是否是加密的
      */
     @AliasFor("value")
-    boolean signature() default true;
+    boolean encrypted() default true;
 
     /**
-     * 请求参数是否需要解密
+     * 请求数据加密算法，默认是 RSA_AES
+     * @see EncryptAlgorithm
      */
-    boolean decryptForRequest() default false;
+    EncryptAlgorithm encryptAlgorithm() default EncryptAlgorithm.RSA_AES;
 
     /**
-     * 响应数据是否需要加密
+     * API 请求是否需要进行数字签名认证。
+     *
+     * <p>
+     * 签名一般由客户端生成，客户端使用约定好的信息摘要算法先生成摘要，然后使用 RSA 私钥
+     * 对摘要进行加密形成数字签名。
+     * <p>
+     * 单纯依靠摘要算法不能严格地验证数据完整性，在非安全信道中，数据和摘要都存在篡改风险，
+     * 攻击者在篡改数据时也可以篡改摘要。
+     * <p>
+     * 摘要的生成一般需要加随机盐，加盐有利于避免类似彩虹表攻击。
      */
-    boolean encryptForResponse() default false;
+    boolean signature() default false;
+
+    /**
+     * 客户端摘要算法，默认是 MD5
+     * @see DigestAlgorithm
+     */
+    DigestAlgorithm digestAlgorithm() default DigestAlgorithm.MD5;
+
+    /**
+     * 数字签名有效期。
+     * <p>
+     * 单位是秒，默认60s。
+     * <p>
+     * 如果配置小于等于 0，表示长期有效，签名应该尽量避免长期有效以降低破解风险。
+     */
+    long signatureValidityTime() default 60L;
+
+    /**
+     * 是否需要对合法请求进行防重处理
+     */
+    boolean idempotent() default true;
+
+    /**
+     * 幂等防重策略，默认采用 NONCE 策略
+     * @see IdempotentStrategy
+     */
+    IdempotentStrategy strategy() default IdempotentStrategy.NONCE;
+
+    /**
+     * 幂等防重的有效期，有效期之后，合法请求可以再次请求，基于 NONCE 策略和 LOCK 策略才有意义。
+     * <p>
+     * 另外需要注意：如果当前接口既需要验证数字签名又需要幂等防重，验签逻辑优先。
+     */
+    long idempotentValidityTime() default 5L;
+
+    /**
+     * 幂等防重的提示消息
+     */
+    String idempotentMessage() default "发生了幂等性冲突";
+
+    /**
+     * 响应数据是否需要脱敏
+     */
+    boolean desensitized() default false;
 
 }
