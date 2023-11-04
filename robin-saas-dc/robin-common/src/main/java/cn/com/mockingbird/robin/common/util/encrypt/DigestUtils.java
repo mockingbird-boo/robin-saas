@@ -37,14 +37,14 @@ public final class DigestUtils {
     }
 
     /**
-     * 验签，即判断当前内容是否签名过的原内容
+     * 完整性校验，即判断当前内容是否摘要算法处理过的原内容
      * @param content 要进行判断的内容
-     * @param signature 签名
+     * @param digest 摘要
      * @param algorithm 算法 {@link Standard.Algorithm}
      * @return true - 是
      */
-    private static boolean isOriginalContent(String content, String signature, String algorithm) {
-        return digest(content, algorithm).equals(signature);
+    public static boolean isOriginalContent(String content, String digest, String algorithm) {
+        return digest(content, algorithm).equals(digest);
     }
 
     public static String md5(String content) {
@@ -59,16 +59,16 @@ public final class DigestUtils {
         return digest(content, Standard.Algorithm.SHA256);
     }
 
-    public static boolean isOriginalContentByMd5(String content, String signature) {
-        return isOriginalContent(content, signature, Standard.Algorithm.MD5);
+    public static boolean isOriginalContentByMd5(String content, String digest) {
+        return isOriginalContent(content, digest, Standard.Algorithm.MD5);
     }
 
-    public static boolean isOriginalContentBySha1(String content, String signature) {
-        return isOriginalContent(content, signature, Standard.Algorithm.SHA1);
+    public static boolean isOriginalContentBySha1(String content, String digest) {
+        return isOriginalContent(content, digest, Standard.Algorithm.SHA1);
     }
 
-    public static boolean isOriginalContentBySha256(String content, String signature) {
-        return isOriginalContent(content, signature, Standard.Algorithm.SHA256);
+    public static boolean isOriginalContentBySha256(String content, String digest) {
+        return isOriginalContent(content, digest, Standard.Algorithm.SHA256);
     }
 
 }

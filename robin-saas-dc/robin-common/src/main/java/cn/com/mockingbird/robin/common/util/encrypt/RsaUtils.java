@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -71,30 +72,38 @@ public class RsaUtils {
         return Base64Utils.encode(publicKey.getEncoded());
     }
 
-    public PrivateKey getPrivateKey(String privateKey) throws Exception {
-        byte[] keyBytes = Base64Utils.decode2Bytes(privateKey);
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance(Standard.Algorithm.RSA);
-        return keyFactory.generatePrivate(keySpec);
+    public PrivateKey getPrivateKey(String privateKey) {
+        try {
+            byte[] keyBytes = Base64Utils.decode2Bytes(privateKey);
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance(Standard.Algorithm.RSA);
+            return keyFactory.generatePrivate(keySpec);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public PublicKey getPublicKey(String publicKey) throws Exception {
-        byte[] keyBytes = Base64Utils.decode2Bytes(publicKey);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance(Standard.Algorithm.RSA);
-        return keyFactory.generatePublic(keySpec);
+    public PublicKey getPublicKey(String publicKey) {
+        try {
+            byte[] keyBytes = Base64Utils.decode2Bytes(publicKey);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance(Standard.Algorithm.RSA);
+            return keyFactory.generatePublic(keySpec);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
-     * 公钥加密
+     * 公钥或私钥加密
      * @param data 待加密数据
-     * @param publicKey 公钥
+     * @param key 公钥或私钥
      * @return Base64 编码后的加密字符串
      */
-    public String encrypt(String data, PublicKey publicKey) {
+    public String encrypt(String data, Key key) {
         try {
             Cipher cipher = Cipher.getInstance(Standard.Algorithm.RSA);
-            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            cipher.init(Cipher.ENCRYPT_MODE, key);
             int dataLength = data.getBytes().length;
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             int offset = 0;
@@ -117,10 +126,16 @@ public class RsaUtils {
         }
     }
 
-    public String decrypt(String data, PrivateKey privateKey) {
+    /**
+     * 公钥或私钥解密
+     * @param data 待解密数据
+     * @param key 公钥或私钥
+     * @return 解密数据
+     */
+    public String decrypt(String data, Key key) {
         try {
             Cipher cipher = Cipher.getInstance(Standard.Algorithm.RSA);
-            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] dataBytes = Base64Utils.decode2Bytes(data);
             int dataLength = dataBytes.length;
             ByteArrayOutputStream out = new ByteArrayOutputStream();

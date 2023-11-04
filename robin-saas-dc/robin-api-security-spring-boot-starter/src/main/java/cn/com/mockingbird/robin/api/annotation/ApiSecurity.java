@@ -1,9 +1,8 @@
 package cn.com.mockingbird.robin.api.annotation;
 
-import cn.com.mockingbird.robin.api.enums.EncryptAlgorithm;
 import cn.com.mockingbird.robin.api.enums.DigestAlgorithm;
+import cn.com.mockingbird.robin.api.enums.EncryptAlgorithm;
 import cn.com.mockingbird.robin.api.enums.IdempotentStrategy;
-import cn.com.mockingbird.robin.common.constant.Standard;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
@@ -28,19 +27,20 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
+@SuppressWarnings("unused")
 public @interface ApiSecurity {
 
     @AliasFor("encrypted")
     boolean value() default true;
 
     /**
-     * 请求数据是否是加密的
+     * 请求数据传输是否是加密的
      */
     @AliasFor("value")
     boolean encrypted() default true;
 
     /**
-     * 请求数据加密算法，默认是 RSA_AES
+     * 客户端加密算法，默认是 RSA_AES，即 RSA 公钥加密 AES 密钥，AES 密钥加密实际请求参数
      * @see EncryptAlgorithm
      */
     EncryptAlgorithm encryptAlgorithm() default EncryptAlgorithm.RSA_AES;
@@ -68,9 +68,7 @@ public @interface ApiSecurity {
     /**
      * 数字签名有效期。
      * <p>
-     * 单位是秒，默认60s。
-     * <p>
-     * 如果配置小于等于 0，表示长期有效，签名应该尽量避免长期有效以降低破解风险。
+     * 单位是秒，默认60s，签名应该尽量避免长期有效以降低破解风险
      */
     long signatureValidityTime() default 60L;
 

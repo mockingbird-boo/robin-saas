@@ -31,7 +31,7 @@ public final class BranchUtils {
      * @return {@link PresentOrElseHandler} 处理逻辑
      */
     @SuppressWarnings("unused")
-    public static PresentOrElseHandler<?> nonNullOrElse(Object object) {
+    public static <T> PresentOrElseHandler<T> nonNullOrElse(T object) {
         return ((consumer, nullAction) ->
                 isTureOrFalse(Objects.nonNull(object)).trueOrFalseHandle(
                         () -> consumer.accept(object), nullAction));

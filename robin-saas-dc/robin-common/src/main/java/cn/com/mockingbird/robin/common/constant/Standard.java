@@ -25,6 +25,8 @@ public interface Standard {
         String EMPTY = "";
 
         String COMMA = ",";
+
+        String AT = "@";
     }
 
     /**
@@ -41,6 +43,11 @@ public interface Standard {
          */
         String CONTENT_LENGTH = "Content-Length";
 
+        String NONCE = "x-nonce";
+
+        String TIMESTAMP = "x-timestamp";
+
+        String SIGNATURE = "x-signature";
     }
 
     /**

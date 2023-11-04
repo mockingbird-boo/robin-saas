@@ -20,7 +20,7 @@ public class RequestBodyTransferFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // 使用装饰者替换 HttpServletRequest
+        // 使用 HttpServletRequestBodyWrapper 替换 HttpServletRequest
         HttpServletRequestBodyWrapper httpServletRequestBodyWrapper = new HttpServletRequestBodyWrapper(request);
         filterChain.doFilter(httpServletRequestBodyWrapper, response);
     }
