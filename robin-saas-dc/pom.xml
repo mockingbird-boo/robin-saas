@@ -26,16 +26,4 @@
         <module>robin-api-security-spring-boot-starter</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-junit5-dependencies</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
 </project>

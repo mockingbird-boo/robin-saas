@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.banner.core;
 
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -24,7 +24,7 @@ public class BannerApplicationRunner implements ApplicationRunner {
     @Value("${spring.application.name}")
     private String name;
 
-    @Resource
+    @Autowired
     private ServerProperties serverProperties;
 
     @Override

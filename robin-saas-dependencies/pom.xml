@@ -20,6 +20,7 @@
         <lombok.version>1.18.26</lombok.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
         <commons-io.version>2.13.0</commons-io.version>
+        <orika-core.version>1.5.4</orika-core.version>
         <fastjson2.version>2.0.39</fastjson2.version>
         <mybatis-flex-spring-boot-starter.version>1.6.8</mybatis-flex-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.5.3.2</mybatis-plus-boot-starter.version>
@@ -29,7 +30,7 @@
         <HikariCP.version>5.0.1</HikariCP.version>
         <transmittable-thread-local.version>2.14.3</transmittable-thread-local.version>
         <redisson-spring-boot-starter.version>3.20.0</redisson-spring-boot-starter.version>
-        <tomcat-embed-core.version>10.1.5</tomcat-embed-core.version>
+        <tomcat-embed-core.version>10.1.6</tomcat-embed-core.version>
     </properties>
 
     <dependencyManagement>
@@ -57,8 +58,10 @@
             </dependency>
             <dependency>
                 <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-common</artifactId>
+                <artifactId>robin-starter-dependencies</artifactId>
                 <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -74,6 +77,11 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
@@ -124,26 +132,6 @@
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-core</artifactId>
                 <version>${tomcat-embed-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-banner-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-redis-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-web-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.com.mockingbird</groupId>
-                <artifactId>robin-mybatis-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
