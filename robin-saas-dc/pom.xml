@@ -24,6 +24,7 @@
         <module>robin-redis-spring-boot-starter</module>
         <module>robin-integration-spring-boot-starter</module>
         <module>robin-api-security-spring-boot-starter</module>
+        <module>robin-dynamic-datasource-spring-boot-starter</module>
     </modules>
 
 </project>
