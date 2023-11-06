@@ -18,4 +18,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-common</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-redis-spring-boot-starter</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
