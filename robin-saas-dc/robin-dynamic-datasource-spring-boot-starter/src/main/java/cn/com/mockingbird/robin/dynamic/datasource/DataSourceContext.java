@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.dynamic.datasource.util;
+package cn.com.mockingbird.robin.dynamic.datasource;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 

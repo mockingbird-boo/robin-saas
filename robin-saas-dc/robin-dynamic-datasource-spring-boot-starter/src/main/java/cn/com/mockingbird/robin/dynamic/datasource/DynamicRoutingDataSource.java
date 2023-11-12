@@ -1,7 +1,6 @@
-package cn.com.mockingbird.robin.dynamic.datasource.core;
+package cn.com.mockingbird.robin.dynamic.datasource;
 
 import cn.com.mockingbird.robin.dynamic.datasource.model.DataSourceInfo;
-import cn.com.mockingbird.robin.dynamic.datasource.util.DataSourceContext;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -23,8 +22,17 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * 当前数据源 KEY
      */
     private static final ThreadLocal<String> CURRENT_DATASOURCE_KEY = new ThreadLocal<>();
-    private final Map<Object, Object> targetDataSources = new HashMap<>();
-    private final Map<Object, DataSourceInfo> targetDataSourceInfos = new HashMap<>();
+    /**
+     * 缓存所有的 DataSource
+     */
+    private final Map<Object, Object> dataSources = new HashMap<>();
+    /**
+     * 缓存所有的 DataSourceInfo
+     */
+    private final Map<Object, DataSourceInfo> dataSourceInfos = new HashMap<>();
+    /**
+     * 默认的数据源
+     */
     private final DataSource defaultDataSource;
 
     public DynamicRoutingDataSource(DataSource dataSource) {
@@ -33,9 +41,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     @Override
     public void afterPropertiesSet() {
-        this.targetDataSources.put(DataSourceContext.DEFAULT_DATA_SOURCE_KEY, defaultDataSource);
+        this.dataSources.put(DataSourceContext.DEFAULT_DATA_SOURCE_KEY, defaultDataSource);
         super.setDefaultTargetDataSource(defaultDataSource);
-        super.setTargetDataSources(targetDataSources);
+        super.setTargetDataSources(dataSources);
         super.afterPropertiesSet();
     }
 
@@ -57,10 +65,10 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @return true - 新增成功
      */
     public synchronized boolean addDataSource(DataSourceInfo dataSourceInfo, Boolean overwrite) {
-        if (!overwrite && targetDataSources.containsKey(dataSourceInfo.getKey())) {
+        if (!overwrite && dataSources.containsKey(dataSourceInfo.getKey())) {
             return false;
         }
-        if (targetDataSources.containsKey(dataSourceInfo.getKey()) && dataSourceInfo.equals(targetDataSourceInfos.get(dataSourceInfo.getKey()))) {
+        if (dataSources.containsKey(dataSourceInfo.getKey()) && dataSourceInfo.equals(dataSourceInfos.get(dataSourceInfo.getKey()))) {
             return true;
         }
         addDataSource(dataSourceInfo);
@@ -74,9 +82,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @return true - 新增并且切换成功
      */
     public synchronized boolean addAndSwitchDataSource(DataSourceInfo dataSourceInfo, Boolean overwrite) {
-        if (!overwrite && targetDataSources.containsKey(dataSourceInfo.getKey())) {
+        if (!overwrite && dataSources.containsKey(dataSourceInfo.getKey())) {
             return false;
-        } else if (targetDataSources.containsKey(dataSourceInfo.getKey()) && dataSourceInfo.equals(targetDataSourceInfos.get(dataSourceInfo.getKey()))) {
+        } else if (dataSources.containsKey(dataSourceInfo.getKey()) && dataSourceInfo.equals(dataSourceInfos.get(dataSourceInfo.getKey()))) {
             CURRENT_DATASOURCE_KEY.set(dataSourceInfo.getKey());
             return true;
         } else {
@@ -92,7 +100,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @return true - 切换成功
      */
     public synchronized boolean switchDataSource(String key) {
-        if (!targetDataSources.containsKey(key)) {
+        if (!dataSources.containsKey(key)) {
             return false;
         }
         CURRENT_DATASOURCE_KEY.set(key);
@@ -108,8 +116,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         if (CURRENT_DATASOURCE_KEY.get().equals(key)) {
             return false;
         }
-        targetDataSources.remove(key);
-        targetDataSourceInfos.remove(key);
+        dataSources.remove(key);
+        dataSourceInfos.remove(key);
         return true;
     }
 
@@ -125,13 +133,13 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @return 默认的数据源
      */
     public DataSource getDefaultDataSource() {
-        return (DataSource) targetDataSources.get(DataSourceContext.DEFAULT_DATA_SOURCE_KEY);
+        return (DataSource) dataSources.get(DataSourceContext.DEFAULT_DATA_SOURCE_KEY);
     }
 
     private void addDataSource(DataSourceInfo dataSourceInfo) {
         DataSource dataSource = newDataSource(dataSourceInfo);
-        targetDataSources.put(dataSourceInfo.getKey(), dataSource);
-        targetDataSourceInfos.put(dataSourceInfo.getKey(), dataSourceInfo);
+        dataSources.put(dataSourceInfo.getKey(), dataSource);
+        dataSourceInfos.put(dataSourceInfo.getKey(), dataSourceInfo);
         super.afterPropertiesSet();
     }
 

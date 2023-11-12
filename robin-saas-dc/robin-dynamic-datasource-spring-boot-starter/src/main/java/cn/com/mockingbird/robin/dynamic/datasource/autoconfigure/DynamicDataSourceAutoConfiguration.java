@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.dynamic.datasource.autoconfigure;
 
 import cn.com.mockingbird.robin.dynamic.datasource.aop.DynamicDataSourceAspect;
-import cn.com.mockingbird.robin.dynamic.datasource.core.DynamicRoutingDataSource;
+import cn.com.mockingbird.robin.dynamic.datasource.DynamicRoutingDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
