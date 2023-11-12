@@ -1,6 +1,7 @@
 package cn.com.mockingbird.robin.dynamic.datasource.core;
 
 import cn.com.mockingbird.robin.dynamic.datasource.model.DataSourceInfo;
+import cn.com.mockingbird.robin.dynamic.datasource.util.DataSourceContext;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @author zhaopeng
  * @date 2023/11/7 23:04
  **/
+@SuppressWarnings("unused")
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     /**
@@ -23,8 +25,6 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
     private static final ThreadLocal<String> CURRENT_DATASOURCE_KEY = new ThreadLocal<>();
     private final Map<Object, Object> targetDataSources = new HashMap<>();
     private final Map<Object, DataSourceInfo> targetDataSourceInfos = new HashMap<>();
-    private static final String DEFAULT_DATA_SOURCE_KEY = "default";
-
     private final DataSource defaultDataSource;
 
     public DynamicRoutingDataSource(DataSource dataSource) {
@@ -33,7 +33,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     @Override
     public void afterPropertiesSet() {
-        this.targetDataSources.put(DEFAULT_DATA_SOURCE_KEY, defaultDataSource);
+        this.targetDataSources.put(DataSourceContext.DEFAULT_DATA_SOURCE_KEY, defaultDataSource);
         super.setDefaultTargetDataSource(defaultDataSource);
         super.setTargetDataSources(targetDataSources);
         super.afterPropertiesSet();
@@ -117,7 +117,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * 切换成默认的数据源
      */
     public void switchDefaultDataSource() {
-        CURRENT_DATASOURCE_KEY.set(DEFAULT_DATA_SOURCE_KEY);
+        CURRENT_DATASOURCE_KEY.set(DataSourceContext.DEFAULT_DATA_SOURCE_KEY);
     }
 
     /**
@@ -125,7 +125,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @return 默认的数据源
      */
     public DataSource getDefaultDataSource() {
-        return (DataSource) targetDataSources.get(DEFAULT_DATA_SOURCE_KEY);
+        return (DataSource) targetDataSources.get(DataSourceContext.DEFAULT_DATA_SOURCE_KEY);
     }
 
     private void addDataSource(DataSourceInfo dataSourceInfo) {
