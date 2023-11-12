@@ -1,8 +1,7 @@
 package cn.com.mockingbird.robin.dynamic.datasource.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -15,14 +14,13 @@ import java.util.Objects;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class DataSourceInfo {
 
     /**
-     * 数据源名称
+     * 数据源唯一标识
      */
-    private String name;
+    private String key;
 
     /**
      * 数据库驱动
@@ -47,7 +45,7 @@ public class DataSourceInfo {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof DataSourceInfo that) {
-            return Objects.equals(this.name, that.name) &&
+            return Objects.equals(this.key, that.key) &&
                    Objects.equals(this.driverClassName, that.driverClassName) &&
                    Objects.equals(this.url, that.url) &&
                    Objects.equals(this.username, that.username) &&
@@ -60,7 +58,7 @@ public class DataSourceInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, driverClassName, url);
+        return Objects.hash(key);
     }
 
 }
