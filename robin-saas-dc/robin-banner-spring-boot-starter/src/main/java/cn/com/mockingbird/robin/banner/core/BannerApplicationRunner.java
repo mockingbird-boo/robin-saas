@@ -8,11 +8,16 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.util.StringUtils;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 应用程序启动扩展
  * <p>
- * 通过实现 ApplicationRunner 接口，可以在项目启动时对程序进行扩展
- *
+ * 通过实现 ApplicationRunner 接口，可以在项目启动时对程序进行扩展。
+ * <p>
+ * ApplicationRunner 和 CommandLineRunner 都是在 SpringBoot 程序成功启动之后回调，其扩展
+ * 只需要将实现类注册到 Spring 容器中即可。
+ * @see ApplicationRunner
  * @author zhaopeng
  * @date 2023/10/4 23:22
  **/
@@ -41,7 +46,7 @@ public class BannerApplicationRunner implements ApplicationRunner {
         new Thread(() -> {
             try {
                 // 线程休眠1s，确保输出到结尾
-                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
