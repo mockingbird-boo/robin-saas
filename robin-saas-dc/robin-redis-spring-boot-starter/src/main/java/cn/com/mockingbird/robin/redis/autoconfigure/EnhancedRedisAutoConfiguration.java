@@ -60,6 +60,12 @@ public class EnhancedRedisAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisStreamService redisStreamService(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisStreamService(redisTemplate);
+    }
+
+    @Bean
     @ConditionalOnBean(RedissonClient.class)
     public RedisLockService redisLockService(RedissonClient redissonClient) {
         return new RedisLockService(redissonClient);
