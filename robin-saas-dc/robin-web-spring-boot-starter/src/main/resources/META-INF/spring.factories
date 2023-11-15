@@ -3,5 +3,4 @@ org.springframework.context.ApplicationContextInitializer=\
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   cn.com.mockingbird.robin.web.config.ThreadPoolConfiguration,\
-  cn.com.mockingbird.robin.web.config.OpenApiConfiguration,\
   cn.com.mockingbird.robin.web.config.WebAutoConfiguration

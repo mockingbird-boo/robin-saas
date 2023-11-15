@@ -35,8 +35,14 @@ spring:
     auto-startup: true
     jdbc:
       initialize-schema: never
+
 server:
   port: 8081
 logging:
   level:
     cn.com.mockingbird.robin.quartz: debug
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

@@ -45,6 +45,6 @@ public @interface DistributedLock {
     /**
      * 锁的类型，默认是可重入的
      */
-    LockType lockType() default LockType.REENTRANT;
+    LockType lock() default LockType.REENTRANT;
 
 }
