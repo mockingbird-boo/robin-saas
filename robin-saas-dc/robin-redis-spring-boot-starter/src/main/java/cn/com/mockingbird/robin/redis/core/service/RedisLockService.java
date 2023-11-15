@@ -104,7 +104,7 @@ public class RedisLockService {
      * 尝试获取锁
      * @param lock 锁实例
      * @param waitTime 最大等待时间，单位：秒
-     * @param leaseTime 获取锁之后的释放锁时间，单位：秒
+     * @param leaseTime 获取锁之后的释放锁时间，单位：秒，如果 <= 0，底层会启动看门狗
      * @return true - 锁成功获取；false - 失败
      */
     public boolean tryLock(RLock lock, long waitTime, long leaseTime) {

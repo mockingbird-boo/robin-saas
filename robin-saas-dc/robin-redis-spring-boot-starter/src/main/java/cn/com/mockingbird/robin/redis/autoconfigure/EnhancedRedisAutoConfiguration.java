@@ -1,5 +1,6 @@
 package cn.com.mockingbird.robin.redis.autoconfigure;
 
+import cn.com.mockingbird.robin.redis.core.lock.DistributedLockAspect;
 import cn.com.mockingbird.robin.redis.core.service.*;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.starter.RedissonAutoConfiguration;
@@ -69,6 +70,12 @@ public class EnhancedRedisAutoConfiguration {
     @ConditionalOnBean(RedissonClient.class)
     public RedisLockService redisLockService(RedissonClient redissonClient) {
         return new RedisLockService(redissonClient);
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisLockService.class)
+    public DistributedLockAspect distributedLockAspect() {
+        return new DistributedLockAspect();
     }
 
 }
