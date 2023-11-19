@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.traceMethod;
+package cn.com.mockingbird.robin.web.trace.method;
 
 import org.slf4j.event.Level;
 

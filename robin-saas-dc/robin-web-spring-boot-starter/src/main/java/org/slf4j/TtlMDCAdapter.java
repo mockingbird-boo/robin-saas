@@ -1,6 +1,5 @@
 package org.slf4j;
 
-import ch.qos.logback.classic.util.LogbackMDCAdapter;
 import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.common.util.BranchUtils;
 import com.alibaba.ttl.TransmittableThreadLocal;
@@ -17,7 +16,6 @@ import java.util.Map;
  * 自定义 MDC Adapter
  * <p>
  * 用 TransmittableThreadLocal 替换 ThreadLocal，解决多线程，异步情况下 traceId 可能无法传递问题
- * @see LogbackMDCAdapter
  * @author zhaopeng
  * @date 2023/10/15 16:48
  **/

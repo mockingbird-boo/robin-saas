@@ -1,7 +1,7 @@
-package cn.com.mockingbird.robin.web.traceMethod;
+package cn.com.mockingbird.robin.web.trace.method;
 
+import cn.com.mockingbird.robin.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,11 +24,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 @Slf4j
 @Aspect
-@Order(0)
+@Order(1)
 public class TraceAspect {
 
     @SuppressWarnings("all")
-    @Pointcut("@annotation(cn.com.mockingbird.robin.web.traceMethod.Trace)")
+    @Pointcut("@annotation(cn.com.mockingbird.robin.web.trace.method.Trace)")
     public void tracePointCut() {}
 
     /**
@@ -62,15 +62,15 @@ public class TraceAspect {
      * @param description 描述
      */
     private void recordLog(MethodTracker.TrackingData<?> trackingData, String path, Level level, String description) {
-        String logInfo = StringUtils.isBlank(description) ?
-                "方法追踪 ==> [{}]，耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]" :
-                "方法追踪 ==> [{}]，[{}] 耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]";
+        String logInfo = !hasDescription(description) ?
+                "方法追踪 -> [{}]，耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]" :
+                "方法追踪 -> [{}]，[{}] 耗时：[{}] ms，开始时间：[{}]，结束时间：[{}]";
 
-        String start = cn.com.mockingbird.robin.common.util.StringUtils.millisToString(trackingData.getStartMillis());
-        String end = cn.com.mockingbird.robin.common.util.StringUtils.millisToString(trackingData.getEndMillis());
+        String start = StringUtils.millisToString(trackingData.getStartMillis());
+        String end = StringUtils.millisToString(trackingData.getEndMillis());
         List<String> params = new ArrayList<>();
         params.add(path);
-        if (StringUtils.isNotBlank(description)) {
+        if (hasDescription(description)) {
             params.add(description);
         }
         params.add(String.valueOf(trackingData.getDuration()));
@@ -107,7 +107,7 @@ public class TraceAspect {
         return source.toString();
     }
 
-    private static Map<String, String> getMethodParams(MethodSignature signature) {
+    private Map<String, String> getMethodParams(MethodSignature signature) {
         Map<String, String> params = new LinkedHashMap<>();
         String[] parameterNames = signature.getParameterNames();
         Class<?>[] parameterTypes = signature.getParameterTypes();
@@ -117,6 +117,10 @@ public class TraceAspect {
             }
         }
         return params;
+    }
+
+    private boolean hasDescription(String description) {
+        return description != null && !"".equals(description.trim());
     }
 
 }
