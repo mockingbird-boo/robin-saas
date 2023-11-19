@@ -17,7 +17,7 @@ import cn.com.mockingbird.robin.common.util.encrypt.RsaUtils;
 import cn.com.mockingbird.robin.common.util.request.RequestUtils;
 import cn.com.mockingbird.robin.redis.core.service.RedisLockService;
 import cn.com.mockingbird.robin.redis.core.service.RedisStringService;
-import cn.com.mockingbird.robin.web.mvc.ResponseCode;
+import cn.com.mockingbird.robin.common.util.response.ResponseCode;
 import com.alibaba.fastjson2.JSONObject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;

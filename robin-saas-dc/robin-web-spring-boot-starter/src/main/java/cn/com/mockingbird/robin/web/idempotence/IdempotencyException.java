@@ -1,7 +1,7 @@
 package cn.com.mockingbird.robin.web.idempotence;
 
 import cn.com.mockingbird.robin.common.exception.BaseRuntimeException;
-import cn.com.mockingbird.robin.web.mvc.ResponseCode;
+import cn.com.mockingbird.robin.common.util.response.ResponseCode;
 
 import java.io.Serial;
 

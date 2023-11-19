@@ -1,6 +1,7 @@
 package cn.com.mockingbird.robin.web.mvc;
 
 import cn.com.mockingbird.robin.common.exception.BaseRuntimeException;
+import cn.com.mockingbird.robin.common.util.response.ResponseCode;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
