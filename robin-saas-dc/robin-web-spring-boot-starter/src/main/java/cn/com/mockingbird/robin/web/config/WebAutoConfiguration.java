@@ -2,11 +2,11 @@ package cn.com.mockingbird.robin.web.config;
 
 import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.web.context.SpringApplicationContext;
+import cn.com.mockingbird.robin.web.feign.FeignRequestInterceptor;
 import cn.com.mockingbird.robin.web.mvc.InitBinderAdvice;
 import cn.com.mockingbird.robin.web.mvc.ResponseDataAdvice;
 import cn.com.mockingbird.robin.web.mvc.UniformExceptionHandler;
-import cn.com.mockingbird.robin.web.trace.FeignRequestInterceptor;
-import cn.com.mockingbird.robin.web.trace.RequestTraceFilter;
+import cn.com.mockingbird.robin.web.trace.log.RequestTracker;
 import cn.com.mockingbird.robin.web.trace.method.TraceAspect;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -17,8 +17,8 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,18 +61,9 @@ public class WebAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "spring.web.enhance.trace", name = "enable", havingValue = "true", matchIfMissing = true)
-    public FilterRegistrationBean<RequestTraceFilter> requestTraceFilter() {
-        FilterRegistrationBean<RequestTraceFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new RequestTraceFilter());
-        filterRegistrationBean.setOrder(Integer.MIN_VALUE + 100);
-        filterRegistrationBean.addUrlPatterns("/*");
-        return filterRegistrationBean;
-    }
-
-    @Bean
-    public SpringApplicationContext springApplicationContext() {
-        return new SpringApplicationContext();
+    @ConditionalOnProperty(name = "spring.web.request.trace.enable", havingValue = "true", matchIfMissing = true)
+    public RequestTracker traceRequestFilter() {
+        return new RequestTracker();
     }
 
     @Bean
@@ -83,6 +74,12 @@ public class WebAutoConfiguration {
     @Bean
     public TraceAspect traceAspect() {
         return new TraceAspect();
+    }
+
+    @Lazy
+    @Bean
+    public SpringApplicationContext springApplicationContext() {
+        return new SpringApplicationContext();
     }
 
 }

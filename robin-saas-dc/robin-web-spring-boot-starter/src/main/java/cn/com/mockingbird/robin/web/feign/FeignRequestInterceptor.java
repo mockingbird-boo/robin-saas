@@ -1,7 +1,8 @@
-package cn.com.mockingbird.robin.web.trace;
+package cn.com.mockingbird.robin.web.feign;
 
 import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.common.util.request.RequestUtils;
+import cn.com.mockingbird.robin.web.trace.log.MDCUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Enumeration;
 
 /**
- * Feign 请求拦截器
+ * Feign 请求拦截器，支持 Header 信息透传
  *
  * @author zhaopeng
  * @date 2023/10/22 2:37

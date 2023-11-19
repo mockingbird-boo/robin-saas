@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 自定义 MDC Adapter
+ * 自定义 MDC Adapter，MDC(Mapped Diagnostic Contexts) 是一个线程安全的存放诊断日志的容器。
  * <p>
- * 用 TransmittableThreadLocal 替换 ThreadLocal，解决多线程，异步情况下 traceId 可能无法传递问题
+ * 用 TransmittableThreadLocal 替换 ThreadLocal，解决多线程异步情况下 traceId 可能无法传递问题
  * @author zhaopeng
  * @date 2023/10/15 16:48
  **/
@@ -25,9 +25,8 @@ public class TtlMDCAdapter implements MDCAdapter {
 
     private static final int WRITE_OPERATION = 1;
     private static final int READ_OPERATION = 2;
-
-    private final static TtlMDCAdapter TTL_MDC_ADAPTER;
-    private final static ThreadLocal<Integer> LAST_OP_CONTEXT;
+    private static final TtlMDCAdapter TTL_MDC_ADAPTER;
+    private static final ThreadLocal<Integer> LAST_OP_CONTEXT;
 
     static {
         TTL_MDC_ADAPTER = new TtlMDCAdapter();

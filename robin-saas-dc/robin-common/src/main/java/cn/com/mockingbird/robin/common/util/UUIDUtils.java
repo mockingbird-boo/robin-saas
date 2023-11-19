@@ -21,6 +21,7 @@ public final class UUIDUtils {
      * UUID 生成
      * @return UUID 字符串
      */
+    @SuppressWarnings("unused")
     public static String generateShortUuid() {
         // JDK提供的UUID：32位、含“-”
         String uuid = UUID.randomUUID().toString().replace("-", "");
@@ -35,6 +36,14 @@ public final class UUIDUtils {
             shortUuid.append(chars[num % 0x3E]);
         }
         return shortUuid.toString();
+    }
+
+    /**
+     * UUID 生成
+     * @return UUID 字符串
+     */
+    public static String generateUuid() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
 }

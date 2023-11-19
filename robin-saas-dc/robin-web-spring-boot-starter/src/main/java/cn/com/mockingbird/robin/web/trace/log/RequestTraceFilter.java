@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.trace;
+package cn.com.mockingbird.robin.web.trace.log;
 
 import cn.com.mockingbird.robin.common.constant.Standard;
 import cn.com.mockingbird.robin.common.util.BranchUtils;
@@ -15,9 +15,11 @@ import java.io.IOException;
 /**
  * Web 请求追踪过滤器
  *
+ * @see RequestTracker
  * @author zhaopeng
  * @date 2023/10/16 0:19
  **/
+@Deprecated
 public class RequestTraceFilter extends OncePerRequestFilter {
 
     @Override

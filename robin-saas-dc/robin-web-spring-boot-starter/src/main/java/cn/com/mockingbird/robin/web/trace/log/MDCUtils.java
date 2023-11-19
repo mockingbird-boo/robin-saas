@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.trace;
+package cn.com.mockingbird.robin.web.trace.log;
 
 import cn.com.mockingbird.robin.common.util.UUIDUtils;
 import org.slf4j.MDC;
@@ -26,7 +26,7 @@ public class MDCUtils {
      * 初始化 MDC
      */
     public static void trace() {
-        MDC.put(TRACE_KEY, UUIDUtils.generateShortUuid());
+        MDC.put(TRACE_KEY, UUIDUtils.generateUuid());
     }
 
     public static void trace(String traceId) {
