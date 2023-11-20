@@ -27,6 +27,8 @@ public interface Standard {
         String COMMA = ",";
 
         String AT = "@";
+
+        String POINT = ".";
     }
 
     /**
