@@ -6,6 +6,7 @@ package cn.com.mockingbird.robin.api.enums;
  * @author zhaopeng
  * @date 2023/11/3 19:12
  **/
+@SuppressWarnings("unused")
 public enum EncryptAlgorithm {
     /**
      * RSA 公钥加密数据

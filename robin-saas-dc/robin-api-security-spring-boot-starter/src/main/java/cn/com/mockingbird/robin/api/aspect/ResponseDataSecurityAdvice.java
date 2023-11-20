@@ -7,6 +7,7 @@ import cn.com.mockingbird.robin.common.util.encrypt.AesUtils;
 import cn.com.mockingbird.robin.common.util.encrypt.RsaUtils;
 import cn.com.mockingbird.robin.web.mvc.ResponseData;
 import com.alibaba.fastjson2.JSONObject;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.Ordered;
@@ -24,7 +25,7 @@ import java.lang.reflect.Method;
 import java.security.PrivateKey;
 
 /**
- * 响应数据脱敏
+ * API 响应数据增强类，支持脱敏和加密
  *
  * @author zhaopeng
  * @date 2023/11/20 16:13
@@ -32,13 +33,10 @@ import java.security.PrivateKey;
 @Slf4j
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ResponseDataDesensitizeAdvice implements ResponseBodyAdvice<Object> {
+public class ResponseDataSecurityAdvice implements ResponseBodyAdvice<Object> {
 
-    private final ApiSecurityProperties apiSecurityProperties;
-
-    public ResponseDataDesensitizeAdvice(ApiSecurityProperties apiSecurityProperties) {
-        this.apiSecurityProperties = apiSecurityProperties;
-    }
+    @Resource
+    private ApiSecurityProperties apiSecurityProperties;
 
     @SuppressWarnings("all")
     @Override

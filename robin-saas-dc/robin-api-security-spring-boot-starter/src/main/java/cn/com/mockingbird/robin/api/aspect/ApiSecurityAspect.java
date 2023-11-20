@@ -15,10 +15,11 @@ import cn.com.mockingbird.robin.common.util.encrypt.AesUtils;
 import cn.com.mockingbird.robin.common.util.encrypt.DigestUtils;
 import cn.com.mockingbird.robin.common.util.encrypt.RsaUtils;
 import cn.com.mockingbird.robin.common.util.request.RequestUtils;
+import cn.com.mockingbird.robin.common.util.response.ResponseCode;
 import cn.com.mockingbird.robin.redis.core.service.RedisLockService;
 import cn.com.mockingbird.robin.redis.core.service.RedisStringService;
-import cn.com.mockingbird.robin.common.util.response.ResponseCode;
 import com.alibaba.fastjson2.JSONObject;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
@@ -44,22 +45,16 @@ import java.time.temporal.ChronoUnit;
 @Aspect
 public class ApiSecurityAspect {
 
+    @Resource
     private ApiSecurityProperties apiSecurityProperties;
 
+    @Resource
     private RedisStringService redisStringService;
 
+    @Resource
     private RedisLockService redisLockService;
 
-    public ApiSecurityAspect() {}
-
-    @SuppressWarnings("unused")
-    public ApiSecurityAspect(ApiSecurityProperties apiSecurityProperties, RedisStringService redisStringService, RedisLockService redisLockService) {
-        this.apiSecurityProperties = apiSecurityProperties;
-        this.redisStringService = redisStringService;
-        this.redisLockService = redisLockService;
-    }
-
-    @Around(value = "@annotation(apiSecurity)")
+    @Around(value = "@annotation(apiSecurity) || @within(apiSecurity)")
     public Object beforeApiProcess(ProceedingJoinPoint joinPoint, ApiSecurity apiSecurity) throws Throwable {
         HttpServletRequest request = RequestUtils.getHttpRequest();
         Object[] args = joinPoint.getArgs();
@@ -165,7 +160,7 @@ public class ApiSecurityAspect {
 
     private void validDigest(String content, String digest, DigestAlgorithm digestAlgorithm) {
         if (!DigestUtils.isOriginalContent(content, digest, digestAlgorithm.name())) {
-            log.warn("摘要数据可能被篡改");
+            log.warn("请求数据可能被篡改");
             throw new ApiSecurityException(ResponseCode.BAD_REQUEST.getCode(), "数字签名认证失败");
         }
     }

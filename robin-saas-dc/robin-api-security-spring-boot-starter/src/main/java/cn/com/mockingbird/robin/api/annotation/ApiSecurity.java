@@ -96,11 +96,6 @@ public @interface ApiSecurity {
     String idempotentMessage() default "发生了幂等性冲突";
 
     /**
-     * 响应数据是否需要脱敏
-     */
-    boolean desensitizeResponse() default false;
-
-    /**
      * 响应数据是否需要加密
      */
     boolean encryptResponse() default false;

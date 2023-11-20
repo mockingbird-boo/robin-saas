@@ -11,8 +11,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2023/11/2 23:34
  **/
 @Data
-@ConfigurationProperties("spring.web.enhance.api.security")
+@ConfigurationProperties("spring.web.api.security")
 public class ApiSecurityProperties {
+
     /**
      * 是否开启 API 接口安全增强
      */
