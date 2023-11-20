@@ -29,6 +29,8 @@ public interface Standard {
         String AT = "@";
 
         String POINT = ".";
+
+        String STAR = "*";
     }
 
     /**
