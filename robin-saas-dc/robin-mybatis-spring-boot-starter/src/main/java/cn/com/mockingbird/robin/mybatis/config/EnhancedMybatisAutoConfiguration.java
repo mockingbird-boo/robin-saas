@@ -73,7 +73,7 @@ public class EnhancedMybatisAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(DataEncryptor.class)
-    @ConditionalOnProperty(prefix = "spring.mybatis-enhance", name = "enableDataEncrypt", havingValue = "true")
+    @ConditionalOnProperty(prefix = "spring.mybatis.data-encrypt", name = "enable", havingValue = "true")
     public DataEncryptor dataEncryptor(EnhancedMybatisProperties enhancedMybatisProperties) {
         Algorithm algorithm = enhancedMybatisProperties.getDataEncrypt().getAlgorithm();
         return switch (algorithm) {

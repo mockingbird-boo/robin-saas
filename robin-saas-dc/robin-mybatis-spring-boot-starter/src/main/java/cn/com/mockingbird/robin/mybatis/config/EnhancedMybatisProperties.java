@@ -16,7 +16,7 @@ import java.util.Set;
  * @date 2023/10/10 23:01
  **/
 @Data
-@ConfigurationProperties(prefix = "spring.mybatis-enhance")
+@ConfigurationProperties(prefix = "spring.mybatis")
 public class EnhancedMybatisProperties {
 
     public static final String AES_KEY = AES.generateRandomKey();
