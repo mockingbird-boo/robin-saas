@@ -84,7 +84,7 @@ public @interface ApiSecurity {
     IdempotentStrategy strategy() default IdempotentStrategy.NONCE;
 
     /**
-     * 幂等防重的有效期，有效期之后，合法请求可以再次请求，基于 NONCE 策略和 LOCK 策略才有意义。
+     * 幂等防重的有效期（单位：秒），过了有效期之后的合法请求可以再次请求，对于基于 NONCE 和 LOCK 的幂等策略才有意义。
      * <p>
      * 另外需要注意：如果当前接口既需要验证数字签名又需要幂等防重，验签逻辑优先。
      */
@@ -98,6 +98,11 @@ public @interface ApiSecurity {
     /**
      * 响应数据是否需要脱敏
      */
-    boolean desensitized() default false;
+    boolean desensitizeResponse() default false;
+
+    /**
+     * 响应数据是否需要加密
+     */
+    boolean encryptResponse() default false;
 
 }

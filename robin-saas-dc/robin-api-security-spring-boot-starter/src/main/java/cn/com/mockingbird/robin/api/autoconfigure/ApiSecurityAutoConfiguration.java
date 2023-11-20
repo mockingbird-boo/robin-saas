@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
  * @date 2023/11/2 23:45
  **/
 @AutoConfiguration(after = EnhancedRedisAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "spring.web.enhance.api.security", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "spring.web.api.security", name = "enable", havingValue = "true")
 @EnableConfigurationProperties(ApiSecurityProperties.class)
 public class ApiSecurityAutoConfiguration {
 

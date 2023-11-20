@@ -46,6 +46,9 @@ public class RequestBodyData {
      */
     private String token;
 
+    /**
+     * 解密后的数据
+     */
     private transient String decryptedData;
 
 }

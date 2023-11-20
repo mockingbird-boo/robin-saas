@@ -66,6 +66,22 @@ public class AesUtils {
         }
     }
 
+    /**
+     * 生成 AES 密钥
+     * @return AES 密钥
+     */
+    public String generateAesKey() {
+        try {
+            KeyGenerator generator = KeyGenerator.getInstance(Standard.Algorithm.AES);
+            generator.init(KEY_SIZE);
+            SecretKey secretKey = generator.generateKey();
+            byte[] secretKeyEncoded = secretKey.getEncoded();
+            return Base64Utils.encode(secretKeyEncoded);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private SecretKeySpec getSecretKeySpec(String key) throws NoSuchAlgorithmException {
         KeyGenerator generator = KeyGenerator.getInstance(Standard.Algorithm.AES);
         SecureRandom secureRandom = SecureRandom.getInstance(Standard.Algorithm.SHA1PRNG);

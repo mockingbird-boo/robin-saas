@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.web.config;
+package cn.com.mockingbird.robin.web.trace.log;
 
 import org.slf4j.TtlMDCAdapter;
 import org.springframework.context.ApplicationContextInitializer;
