@@ -17,9 +17,8 @@ import java.lang.annotation.*;
  * <li> 防窃取：传输数据加密；
  * <li> 防伪装和篡改：数字签名；
  * <li> 防重复调用：支持多种防重策略；
- * <li> 数据脱敏：响应拦截。
+ * <li> 返回数据加密：响应拦截。
  * </ul>
- * 安全性包括：防篡改、防重放、响应数据脱敏。
  *
  * @author zhaopeng
  * @date 2023/10/28 1:09
@@ -27,9 +26,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@SuppressWarnings("unused")
 public @interface ApiSecurity {
 
+    @SuppressWarnings("unused")
     @AliasFor("encrypted")
     boolean value() default true;
 
@@ -93,7 +92,8 @@ public @interface ApiSecurity {
     /**
      * 幂等防重的提示消息
      */
-    String idempotentMessage() default "发生了幂等性冲突";
+    @SuppressWarnings("unused")
+    String idempotentMessage() default "幂等性冲突";
 
     /**
      * 响应数据是否需要加密

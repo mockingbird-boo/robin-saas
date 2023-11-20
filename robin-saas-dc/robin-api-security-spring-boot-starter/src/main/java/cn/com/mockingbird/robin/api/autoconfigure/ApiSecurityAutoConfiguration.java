@@ -4,7 +4,7 @@ import cn.com.mockingbird.robin.api.aspect.ApiSecurityAspect;
 import cn.com.mockingbird.robin.api.aspect.ResponseDataSecurityAdvice;
 import cn.com.mockingbird.robin.api.filter.RequestBodyTransferFilter;
 import cn.com.mockingbird.robin.redis.autoconfigure.EnhancedRedisAutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
  * @author zhaopeng
  * @date 2023/11/2 23:45
  **/
-@AutoConfiguration(after = EnhancedRedisAutoConfiguration.class)
+@AutoConfigureAfter(EnhancedRedisAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "spring.web.api.security", name = "enable", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(ApiSecurityProperties.class)
 public class ApiSecurityAutoConfiguration {

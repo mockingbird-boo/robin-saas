@@ -97,7 +97,7 @@ public class ApiSecurityAspect {
                 String publicKey = apiSecurityProperties.getClientKeyPair().getPublicKey();
                 digest = RsaUtils.decrypt(signature[0], RsaUtils.getPublicKey(publicKey));
             } catch (Exception e) {
-                log.warn("不合法的客户端，身份可能被伪装");
+                log.warn("客户端公钥解密失败，客户端身份也许被伪装");
                 throw new ApiSecurityException(ResponseCode.BAD_REQUEST.getCode(), "数字签名认证失败");
             }
             String decryptedData = requestBodyData == null ? Standard.Str.EMPTY : requestBodyData.getDecryptedData();

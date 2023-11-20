@@ -10,13 +10,13 @@ import cn.com.mockingbird.robin.common.util.encrypt.DigestUtils;
  **/
 public final class Key {
 
-    public static String TOKEN_KEY_PATTERN = "idempotent:token:%s:%s";
+    public static final String TOKEN_KEY_PATTERN = "idempotent:token:%s:%s";
 
-    public static String LOCK_KEY_PREFIX = "idempotent:lock:";
+    public static final String LOCK_KEY_PREFIX = "idempotent:lock:";
 
-    public static String LOCK_KEY_SUFFIX = "%s-%s-%s-%s";
+    public static final String LOCK_KEY_SUFFIX = "%s-%s-%s-%s";
 
-    public static String NONCE_KEY = "idempotent:nonce:%s";
+    public static final String NONCE_KEY = "idempotent:nonce:%s";
 
     public static String generateTokenKey(String username, String token) {
         return String.format(TOKEN_KEY_PATTERN, username, token);
