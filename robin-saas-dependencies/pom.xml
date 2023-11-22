@@ -31,6 +31,7 @@
         <transmittable-thread-local.version>2.14.3</transmittable-thread-local.version>
         <redisson-spring-boot-starter.version>3.20.0</redisson-spring-boot-starter.version>
         <tomcat-embed-core.version>10.1.6</tomcat-embed-core.version>
+        <hutool-core.version>5.8.22</hutool-core.version>
     </properties>
 
     <dependencyManagement>
@@ -132,6 +133,11 @@
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-core</artifactId>
                 <version>${tomcat-embed-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool-core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
