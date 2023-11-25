@@ -33,6 +33,8 @@
         <tomcat-embed-core.version>10.1.6</tomcat-embed-core.version>
         <hutool-core.version>5.8.22</hutool-core.version>
         <spring-security-oauth2-authorization-server.version>1.1.3</spring-security-oauth2-authorization-server.version>
+        <swagger-annotations-jakarta.version>2.2.15</swagger-annotations-jakarta.version>
+
     </properties>
 
     <dependencyManagement>
@@ -144,6 +146,11 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-oauth2-authorization-server</artifactId>
                 <version>${spring-security-oauth2-authorization-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>${swagger-annotations-jakarta.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

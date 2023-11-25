@@ -24,6 +24,7 @@
         <module>robin-saas-uoc</module>
         <module>robin-saas-dc</module>
         <module>robin-saas-uaa</module>
+        <module>robin-saas-upm</module>
     </modules>
 
     <dependencyManagement>

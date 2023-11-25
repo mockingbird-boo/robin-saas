@@ -43,6 +43,8 @@
         <dependency>
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-common</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
