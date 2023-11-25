@@ -15,7 +15,11 @@ public class LoginUser {
 
     private Long tenantId;
 
+    private Long roleId;
+
     private Long departmentId;
+
+    private String phone;
 
     private String username;
 

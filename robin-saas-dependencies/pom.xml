@@ -32,6 +32,7 @@
         <redisson-spring-boot-starter.version>3.20.0</redisson-spring-boot-starter.version>
         <tomcat-embed-core.version>10.1.6</tomcat-embed-core.version>
         <hutool-core.version>5.8.22</hutool-core.version>
+        <spring-security-oauth2-authorization-server.version>1.1.3</spring-security-oauth2-authorization-server.version>
     </properties>
 
     <dependencyManagement>
@@ -138,6 +139,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${spring-security-oauth2-authorization-server.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

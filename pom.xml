@@ -23,6 +23,7 @@
         <module>robin-saas-gateway</module>
         <module>robin-saas-uoc</module>
         <module>robin-saas-dc</module>
+        <module>robin-saas-uaa</module>
     </modules>
 
     <dependencyManagement>
