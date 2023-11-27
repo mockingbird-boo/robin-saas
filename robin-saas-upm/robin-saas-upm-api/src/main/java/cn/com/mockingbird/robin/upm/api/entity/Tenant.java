@@ -8,23 +8,26 @@ import lombok.Setter;
 import java.io.Serial;
 
 /**
- * 菜单实体
+ * 租户
  *
  * @author zhaopeng
- * @date 2023/11/26 1:02
+ * @date 2023/11/27 14:10
  **/
 @Getter
 @Setter
-@Schema(description = "菜单实体")
-public class Menu extends BaseEntity {
+@Schema(description = "租户")
+public class Tenant extends BaseEntity {
 
     @Serial
-    private static final long serialVersionUID = 4687914558375119894L;
+    private static final long serialVersionUID = 6831652189301410808L;
 
-    @Schema(description = "菜单名称")
+    @Schema(description = "租户名称")
     private String name;
 
-    @Schema(description = "上级菜单")
+    @Schema(description = "租户编码")
+    private String code;
+
+    @Schema(description = "上级租户")
     private Long parentId;
 
 }

@@ -8,23 +8,23 @@ import lombok.Setter;
 import java.io.Serial;
 
 /**
- * 用户角色
+ * 用户部门实体
  *
  * @author zhaopeng
- * @date 2023/11/26 1:00
+ * @date 2023/11/27 15:48
  **/
 @Getter
 @Setter
-@Schema(description = "用户角色实体")
-public class UserRole extends BaseEntity {
+@Schema(description = "用户部门实体")
+public class UserDepartment extends BaseEntity {
 
     @Serial
-    private static final long serialVersionUID = -4715416343422379142L;
+    private static final long serialVersionUID = 8584800105988906644L;
 
     @Schema(description = "用户 ID")
     private Long userId;
 
-    @Schema(description = "角色 ID")
-    private Long roleId;
+    @Schema(description = "部门 ID")
+    private Long departmentId;
 
 }

@@ -1,4 +1,4 @@
-package cn.com.mockingbird.robin.upm.api.dto;
+package cn.com.mockingbird.robin.upm.api.model;
 
 import cn.com.mockingbird.robin.upm.api.entity.User;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,13 +23,16 @@ public class UserInfo implements Serializable {
     @Schema(description = "用户实例")
     private User user;
 
-    @Schema(description = "用户权限")
-    private Long[] permissions;
+    @Schema(description = "用户租户")
+    private Long[] tenants;
 
     @Schema(description = "用户角色")
     private Long[] roles;
 
-    @Schema(description = "用户租户")
-    private Long[] tenants;
+    @Schema(description = "用户权限")
+    private Long[] permissions;
+
+    @Schema(description = "用户部门")
+    private Long[] departments;
 
 }
