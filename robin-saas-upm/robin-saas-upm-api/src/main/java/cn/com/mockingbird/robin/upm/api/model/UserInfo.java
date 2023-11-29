@@ -23,9 +23,6 @@ public class UserInfo implements Serializable {
     @Schema(description = "用户实例")
     private User user;
 
-    @Schema(description = "用户租户")
-    private Long[] tenants;
-
     @Schema(description = "用户角色")
     private Long[] roles;
 

@@ -8,23 +8,23 @@ import lombok.Setter;
 import java.io.Serial;
 
 /**
- * 角色权限实体
+ * 权限菜单实体
  *
  * @author zhaopeng
- * @date 2023/11/27 15:44
+ * @date 2023/11/29 23:27
  **/
 @Getter
 @Setter
-@Schema(description = "角色权限实体")
-public class RolePermission extends BaseEntity {
+@Schema(description = "权限菜单实体")
+public class PermissionMenu extends BaseEntity {
 
     @Serial
-    private static final long serialVersionUID = 1900065340733946913L;
+    private static final long serialVersionUID = -8342349316971075174L;
 
-    @Schema(description = "角色ID")
-    private Long roleId;
-
-    @Schema(description = "权限ID")
+    @Schema(description = "权限 ID")
     private Long permissionId;
+
+    @Schema(description = "菜单 ID")
+    private Long menuId;
 
 }

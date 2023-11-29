@@ -27,6 +27,10 @@
             <artifactId>robin-web-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-cache-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
         </dependency>

@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.*;
 
 /**
- * 提供系统用户信息的接口
+ * 提供返回用户信息的接口
  *
  * @author zhaopeng
  * @date 2023/11/25 22:44

@@ -24,7 +24,10 @@ public class Permission extends BaseEntity {
     @Schema(description = "权限编码")
     private String code;
 
-    @Schema(description = "权限类型")
-    private String type;
+    @Schema(description = "权限名称")
+    private String name;
+
+    @Schema(description = "权限类型：1-应用菜单；2-功能操作；3-应用服务")
+    private Integer type;
 
 }

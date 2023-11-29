@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.io.Serial;
 
 /**
- * 用户租户实体
+ * 用户岗位实体
  *
  * @author zhaopeng
  * @date 2023/11/27 14:18
@@ -16,16 +16,16 @@ import java.io.Serial;
 @Getter
 @Setter
 @Schema(description = "用户租户实体")
-public class UserTenant extends BaseEntity {
+public class UserPost extends BaseEntity {
 
     @Serial
-    private static final long serialVersionUID = -3071276220226426477L;
+    private static final long serialVersionUID = 574229395660865713L;
 
     @Schema(description = "用户 ID")
     private Long userId;
 
-    @Schema(description = "租户 ID")
-    private Long tenantId;
+    @Schema(description = "岗位 ID")
+    private Long postId;
 
 
 }

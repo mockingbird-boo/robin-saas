@@ -32,10 +32,22 @@ public class User extends BaseEntity {
     @Schema(description = "手机号码")
     private String phone;
 
+    @Schema(description = "邮箱")
+    private String email;
+
     @Schema(description = "真实姓名")
     private String realName;
 
     @Schema(description = "性别：1-男；2-女")
     private Integer gender;
+
+    @Schema(description = "图像")
+    private String avatar;
+
+    @Schema(description = "状态：1-正常；2-停用；3-冻结")
+    private Integer status;
+
+    @Schema(description = "昵称")
+    private String nickName;
 
 }
