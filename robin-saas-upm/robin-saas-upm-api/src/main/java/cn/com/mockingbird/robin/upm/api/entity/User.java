@@ -50,4 +50,10 @@ public class User extends BaseEntity {
     @Schema(description = "昵称")
     private String nickName;
 
+    @Schema(description = "所属部门")
+    private Long departmentId;
+
+    @Schema(description = "所属岗位")
+    private Long postId;
+
 }

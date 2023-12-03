@@ -11,8 +11,8 @@
 
     <artifactId>robin-saas-upm-api</artifactId>
     <packaging>jar</packaging>
-    <name>用户权限管理中心 - API 模块</name>
-    <description>User Permission Management Center-API Module</description>
+    <name>用户权限管理中心 API 模块</name>
+    <description>User Permission Management Center API Module</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -44,7 +44,6 @@
         <dependency>
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-mybatis-spring-boot-starter</artifactId>
-            <optional>true</optional>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>

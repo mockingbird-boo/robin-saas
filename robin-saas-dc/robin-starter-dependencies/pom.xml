@@ -19,6 +19,7 @@
         <robin-redis-spring-boot-starter.version>1.0.0</robin-redis-spring-boot-starter.version>
         <robin-integration-spring-boot-starter.version>1.0.0</robin-integration-spring-boot-starter.version>
         <robin-cache-spring-boot-starter.version>1.0.0</robin-cache-spring-boot-starter.version>
+        <robin-dynamic-datasource-spring-boot-starter.version>1.0.0</robin-dynamic-datasource-spring-boot-starter.version>
         <junit-platform-launcher.version>1.7.0</junit-platform-launcher.version>
         <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
         <junit-vintage-engine.version>5.9.2</junit-vintage-engine.version>
@@ -61,6 +62,11 @@
                 <groupId>cn.com.mockingbird</groupId>
                 <artifactId>robin-cache-spring-boot-starter</artifactId>
                 <version>${robin-cache-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.mockingbird</groupId>
+                <artifactId>robin-dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${robin-dynamic-datasource-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>

@@ -1,17 +1,19 @@
 package cn.com.mockingbird.robin.uaa.userdetails;
 
-import cn.com.mockingbird.robin.common.user.LoginUser;
-import cn.com.mockingbird.robin.common.user.UserInfo;
-import cn.com.mockingbird.robin.web.mvc.ResponseData;
+import cn.com.mockingbird.robin.upm.api.common.SecurityConstants;
+import cn.com.mockingbird.robin.upm.api.dto.UserInfo;
+import cn.com.mockingbird.robin.upm.api.entity.User;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 提供返回用户信息的接口
@@ -19,7 +21,7 @@ import java.util.*;
  * @author zhaopeng
  * @date 2023/11/25 22:44
  **/
-public interface SystemUserDetailsService extends UserDetailsService, Ordered {
+public interface SecurityUserDetailsService extends UserDetailsService, Ordered {
 
     /**
      * 是否支持指定客户端的认证
@@ -41,36 +43,32 @@ public interface SystemUserDetailsService extends UserDetailsService, Ordered {
 
     /**
      * 返回用户实体
-     * @param systemUser 查询实例
+     * @param securityUser 查询实例
      * @return 用户实例
      */
-    default UserDetails loadSystemUser(SystemUser systemUser) {
-        return this.loadUserByUsername(systemUser.getUsername());
+    default UserDetails loadUserByUsername(SecurityUser securityUser) {
+        return this.loadUserByUsername(securityUser.getUsername());
     }
 
     /**
-     * 返回 UserDetails
-     * @param responseData 响应数据
+     * 返回 UserDetails 实例
+     * @param userInfo 用户信息
      * @return UserDetails 实例
      */
-    default UserDetails getUserDetails(ResponseData<UserInfo> responseData) {
-        UserInfo userInfo = Optional.ofNullable(responseData.getData()).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
+    default UserDetails getUserDetails(UserInfo userInfo) {
         Set<String> set = new HashSet<>();
-
         if (ArrayUtils.isNotEmpty(userInfo.getRoles())) {
-            // 获取角色
-            Arrays.stream(userInfo.getRoles()).forEach(role -> {
-                set.add("ROLE_" + role);
+            Arrays.stream(userInfo.getRoles()).forEach(roleId -> {
+                set.add(SecurityConstants.ROLE + roleId);
             });
             set.addAll(Arrays.asList(userInfo.getPermissions()));
         }
-
         List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(set.toArray(new String[0]));
-        LoginUser loginUser = userInfo.getLoginUser();
-        return new SystemUser(loginUser.getId(), loginUser.getTenantId(), loginUser.getRoleId(),
-                loginUser.getDepartmentId(), loginUser.getPhone(), loginUser.getUsername(),
-                loginUser.getPassword(), true, true, true,
-                false, authorityList);
+        User user = userInfo.getUser();
+        return new SecurityUser(user.getId(), user.getPhone(), user.getEmail(),
+                user.getDepartmentId(), user.getPostId(), user.getUsername(),
+                user.getPassword(), true, true, true,
+                true, authorityList);
     }
 
 }

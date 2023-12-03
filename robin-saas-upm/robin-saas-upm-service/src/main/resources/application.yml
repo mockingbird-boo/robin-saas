@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: upm-service
+  datasource:
+    driver-class-name: org.apache.ibatis.datasource.unpooled.UnpooledDataSource.DriverProxy
+    url:
+    username:
+    password:
+server:
+  port: 8083

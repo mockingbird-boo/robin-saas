@@ -5,7 +5,7 @@ import cn.com.mockingbird.robin.api.autoconfigure.ApiSecurityProperties;
 import cn.com.mockingbird.robin.api.model.SafeResponseData;
 import cn.com.mockingbird.robin.common.util.encrypt.AesUtils;
 import cn.com.mockingbird.robin.common.util.encrypt.RsaUtils;
-import cn.com.mockingbird.robin.web.mvc.ResponseData;
+import cn.com.mockingbird.robin.common.util.response.ResponseData;
 import com.alibaba.fastjson2.JSONObject;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

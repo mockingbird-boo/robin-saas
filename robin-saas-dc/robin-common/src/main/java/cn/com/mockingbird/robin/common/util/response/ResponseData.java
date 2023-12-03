@@ -1,7 +1,7 @@
-package cn.com.mockingbird.robin.web.mvc;
+package cn.com.mockingbird.robin.common.util.response;
 
-import cn.com.mockingbird.robin.common.util.response.ResponseCode;
 import lombok.Data;
+import org.springframework.util.Assert;
 
 import java.time.Instant;
 
@@ -51,5 +51,14 @@ public class ResponseData<T> {
         responseData.setStatus(code);
         responseData.setMessage(message);
         return responseData;
+    }
+
+    public static <T> boolean isSuccess(ResponseData<T> responseData) {
+        return responseData.status == ResponseCode.OK.getCode();
+    }
+
+    public static <T> boolean hasData(ResponseData<T> responseData) {
+        Assert.notNull(responseData, "responseData requires not null");
+        return isSuccess(responseData) && null != responseData.getData();
     }
 }

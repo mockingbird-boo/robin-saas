@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 系统用户
+ * 安全用户
  *
  * @author zhaopeng
  * @date 2023/11/25 21:43
  **/
-public class SystemUser extends User implements OAuth2AuthenticatedPrincipal {
+public class SecurityUser extends User implements OAuth2AuthenticatedPrincipal {
 
     @Serial
     private static final long serialVersionUID = -2340523111684162640L;
@@ -33,16 +33,16 @@ public class SystemUser extends User implements OAuth2AuthenticatedPrincipal {
     private final Long id;
 
     /**
-     * 租户 ID
+     * 手机号
      */
     @Getter
-    private final Long tenantId;
+    private final String phone;
 
     /**
-     * 角色 ID
+     * 邮箱
      */
     @Getter
-    private final Long roleId;
+    private final String email;
 
     /**
      * 部门 ID
@@ -51,21 +51,20 @@ public class SystemUser extends User implements OAuth2AuthenticatedPrincipal {
     private final Long departmentId;
 
     /**
-     * 手机号
+     * 岗位 ID
      */
     @Getter
-    private final String phone;
+    private final Long postId;
 
-
-    public SystemUser(Long id, Long tenantId, Long roleId, Long departmentId, String phone, String username, String password,
-                      boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired,
-                      boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public SecurityUser(Long id, String phone, String email, Long departmentId, Long postId, String username, String password,
+                        boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired,
+                        boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.id = id;
-        this.tenantId = tenantId;
-        this.roleId = roleId;
-        this.departmentId = departmentId;
         this.phone = phone;
+        this.email = email;
+        this.departmentId = departmentId;
+        this.postId = postId;
     }
 
     @Override

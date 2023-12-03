@@ -21,9 +21,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-saas-upm-api</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>cn.com.mockingbird</groupId>
@@ -32,6 +35,10 @@
         <dependency>
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-dynamic-datasource-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
