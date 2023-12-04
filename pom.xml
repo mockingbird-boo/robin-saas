@@ -25,6 +25,8 @@
         <module>robin-saas-dc</module>
         <module>robin-saas-uaa</module>
         <module>robin-saas-upm</module>
+        <module>robin-saas-iam</module>
+        <module>robin-saas-iam/robin-saas-iam-protocol</module>
     </modules>
 
     <dependencyManagement>
