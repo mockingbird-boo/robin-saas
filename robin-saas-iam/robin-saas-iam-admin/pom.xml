@@ -9,9 +9,8 @@
         <version>1.0.0</version>
     </parent>
 
-    <packaging>jar</packaging>
-    <artifactId>robin-saas-iam-audit</artifactId>
-    <name>IAM - 审计模块</name>
+    <artifactId>robin-saas-iam-admin</artifactId>
+    <name>IAM - 管理端</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,11 +18,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>cn.com.mockingbird</groupId>
-            <artifactId>robin-saas-iam-core</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
 </project>
