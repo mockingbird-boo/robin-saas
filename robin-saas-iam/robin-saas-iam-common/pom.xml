@@ -11,13 +11,7 @@
 
     <packaging>jar</packaging>
     <artifactId>robin-saas-iam-common</artifactId>
-    <name>IAM - Common 工具</name>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>IAM - Common 模块</name>
 
     <dependencies>
         <dependency>

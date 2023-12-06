@@ -9,7 +9,8 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>robin-saas-iam-portol</artifactId>
+    <artifactId>robin-saas-iam-portal</artifactId>
+    <name>IAM - 统一门户</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

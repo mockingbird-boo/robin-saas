@@ -12,10 +12,11 @@
     <artifactId>robin-saas-iam-admin</artifactId>
     <name>IAM - 管理端</name>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-saas-iam-audit</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -10,11 +10,12 @@
     </parent>
 
     <artifactId>robin-saas-iam-open-api</artifactId>
+    <name>IAM - Open API 模块</name>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.com.mockingbird</groupId>
+            <artifactId>robin-saas-iam-audit</artifactId>
+        </dependency>
+    </dependencies>
 </project>

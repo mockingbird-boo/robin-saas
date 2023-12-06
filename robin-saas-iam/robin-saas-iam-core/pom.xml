@@ -11,19 +11,12 @@
 
     <artifactId>robin-saas-iam-core</artifactId>
     <packaging>jar</packaging>
-    <name>IAM - 核心包</name>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>IAM - 核心模块</name>
 
     <dependencies>
         <dependency>
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-saas-iam-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

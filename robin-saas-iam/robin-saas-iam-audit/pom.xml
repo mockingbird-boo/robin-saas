@@ -13,17 +13,10 @@
     <artifactId>robin-saas-iam-audit</artifactId>
     <name>IAM - 审计模块</name>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>cn.com.mockingbird</groupId>
             <artifactId>robin-saas-iam-core</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
 </project>
