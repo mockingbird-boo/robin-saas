@@ -8,12 +8,17 @@
         <groupId>cn.com.mockingbird</groupId>
         <artifactId>robin-saas-iam</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
 
     <artifactId>robin-saas-iam-support</artifactId>
     <packaging>jar</packaging>
     <name>IAM - 支撑模块</name>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -76,6 +81,22 @@
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shapesecurity</groupId>
+            <artifactId>salvation2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

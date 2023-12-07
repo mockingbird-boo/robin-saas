@@ -17,6 +17,9 @@
     <description>IAM DEPENDENCIES</description>
 
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <robin-saas-iam-support.version>1.0.0</robin-saas-iam-support.version>
         <robin-saas-iam-common.version>1.0.0</robin-saas-iam-common.version>
         <robin-saas-iam-core.version>1.0.0</robin-saas-iam-core.version>
@@ -26,6 +29,7 @@
         <guava.version>32.1.3-jre</guava.version>
         <passay.version>1.6.4</passay.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
+        <salvation2.version>3.0.1</salvation2.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +78,11 @@
                 <groupId>com.belerweb</groupId>
                 <artifactId>pinyin4j</artifactId>
                 <version>${pinyin4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shapesecurity</groupId>
+                <artifactId>salvation2</artifactId>
+                <version>${salvation2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

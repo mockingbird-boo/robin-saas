@@ -11,7 +11,14 @@
     <name>IAM - 身份识别与访问管理</name>
     <description>Identity and Access Management</description>
 
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <modules>
+        <module>robin-saas-iam-support</module>
         <module>robin-saas-iam-common</module>
         <module>robin-saas-iam-core</module>
         <module>robin-saas-iam-audit</module>

@@ -42,7 +42,6 @@ public class HttpRequestUtils {
     public Map<String, String> getRequestHeaders(HttpServletRequest request) {
         Map<String, String> header = new HashMap<>(16);
         Enumeration<String> headerNames = request.getHeaderNames();
-
         while (headerNames.hasMoreElements()) {
             String thisName = headerNames.nextElement();
             String thisValue = request.getHeader(thisName);

@@ -83,7 +83,7 @@ public class Pinyin4jUtils {
             }
 
             String[] pingYinArray = exchange(temp);
-            return new HashSet<>(Arrays.asList(pingYinArray));
+            return new HashSet<String>(Arrays.asList(pingYinArray));
         } else {
             return null;
         }
